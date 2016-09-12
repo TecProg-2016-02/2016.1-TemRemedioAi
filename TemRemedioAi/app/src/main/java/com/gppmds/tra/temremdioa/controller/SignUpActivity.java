@@ -19,7 +19,6 @@ public class SignUpActivity extends AppCompatActivity {
 
     ParseUser user = new ParseUser();
 
-    /*Variaveis para o User*/
     private EditText mEmailView;
     private EditText mPasswordView;
     private EditText mPasswordViewConfirmation;
@@ -38,7 +37,6 @@ public class SignUpActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sign_up);
 
         setValues();
-
         setListener();
 
     }
@@ -70,7 +68,6 @@ public class SignUpActivity extends AppCompatActivity {
                 attemptRegister();
             }
         });
-
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -105,7 +102,7 @@ public class SignUpActivity extends AppCompatActivity {
         boolean cancel = false;
         View focusView = null;
 
-        /*Password*/
+        // Validate password
         if (TextUtils.isEmpty(password)) {
             mPasswordView.setError(getString(R.string.error_field_required));
             focusView = mPasswordView;
@@ -122,7 +119,7 @@ public class SignUpActivity extends AppCompatActivity {
             cancel = true;
         }
 
-        /*Email*/
+        // Validate email
         if (TextUtils.isEmpty(email)) {
             mEmailView.setError(getString(R.string.error_field_required));
             focusView = mEmailView;
@@ -133,7 +130,7 @@ public class SignUpActivity extends AppCompatActivity {
             cancel = true;
         }
 
-        /*Name*/
+        // Validate name
         if (TextUtils.isEmpty(name)) {
             mNameView.setError(getString(R.string.error_field_required));
             focusView = mNameView;
@@ -144,7 +141,7 @@ public class SignUpActivity extends AppCompatActivity {
             cancel = true;
         }
 
-        /*Age*/
+        // Validate age
         if (TextUtils.isEmpty(mAgeView.getText().toString())) {
             mAgeView.setError(getString(R.string.error_field_required));
             focusView = mAgeView;
@@ -156,7 +153,7 @@ public class SignUpActivity extends AppCompatActivity {
             }
         }
 
-        /*Genre*/
+        // Validate gender
         if (!mGenreMaleView.isChecked() && !mGenreFemView.isChecked()) {
             mGenre.setError(getString(R.string.error_invalid_genre));
             focusView = mGenre;
@@ -165,7 +162,7 @@ public class SignUpActivity extends AppCompatActivity {
         else if (mGenreFemView.isChecked()) genre = "Feminino";
         else if (mGenreMaleView.isChecked()) genre = "Masculino";
 
-        /*Username*/
+        // Validate username
         if (TextUtils.isEmpty(username)) {
             mUsernameView.setError(getString(R.string.error_field_required));
             focusView = mUsernameView;
@@ -173,7 +170,7 @@ public class SignUpActivity extends AppCompatActivity {
         }
 
         if (cancel) {
-
+            // Show errors for user
             focusView.requestFocus();
 
         } else {
