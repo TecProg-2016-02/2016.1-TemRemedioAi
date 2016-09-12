@@ -25,9 +25,9 @@ public class SignUpActivity extends AppCompatActivity {
     private EditText mAgeView;
     private EditText mNameView;
     private EditText mUsernameView;
-    private RadioButton mGenreMaleView;
-    private RadioButton mGenreFemView;
-    private TextView mGenre;
+    private RadioButton mGenderMaleView;
+    private RadioButton mGenderFemView;
+    private TextView mGender;
     private Button mRegisterButton;
     private Button cancelButton;
 
@@ -50,10 +50,10 @@ public class SignUpActivity extends AppCompatActivity {
         mUsernameView = (EditText) findViewById(R.id.username);
         mPasswordViewConfirmation = (EditText) findViewById(R.id.password2);
 
-        mGenre = (TextView) findViewById(R.id.textViewGenre);
+        mGender = (TextView) findViewById(R.id.textViewGender);
 
-        mGenreFemView = (RadioButton) findViewById(R.id.femButton);
-        mGenreMaleView = (RadioButton) findViewById(R.id.mascButton);
+        mGenderFemView = (RadioButton) findViewById(R.id.femButton);
+        mGenderMaleView = (RadioButton) findViewById(R.id.mascButton);
 
         mRegisterButton = (Button) findViewById(R.id.register_button);
         cancelButton = (Button) findViewById(R.id.register_cancel);
@@ -85,9 +85,9 @@ public class SignUpActivity extends AppCompatActivity {
         mPasswordView.setError(null);
         mPasswordViewConfirmation.setError(null);
         mAgeView.setError(null);
-        mGenreMaleView.setError(null);
-        mGenreFemView.setError(null);
-        mGenre.setError(null);
+        mGenderMaleView.setError(null);
+        mGenderFemView.setError(null);
+        mGender.setError(null);
         mUsernameView.setError(null);
 
         // Store values at the time of the login attempt.
@@ -97,7 +97,7 @@ public class SignUpActivity extends AppCompatActivity {
         String name = mNameView.getText().toString();
         String username = mUsernameView.getText().toString();
         int age = 0;
-        String genre = null;
+        String gender = null;
 
         boolean cancel = false;
         View focusView = null;
@@ -154,13 +154,13 @@ public class SignUpActivity extends AppCompatActivity {
         }
 
         // Validate gender
-        if (!mGenreMaleView.isChecked() && !mGenreFemView.isChecked()) {
-            mGenre.setError(getString(R.string.error_invalid_genre));
-            focusView = mGenre;
+        if (!mGenderMaleView.isChecked() && !mGenderFemView.isChecked()) {
+            mGender.setError(getString(R.string.error_invalid_genre));
+            focusView = mGender;
             cancel = true;
         }
-        else if (mGenreFemView.isChecked()) genre = "Feminino";
-        else if (mGenreMaleView.isChecked()) genre = "Masculino";
+        else if (mGenderFemView.isChecked()) gender = "Feminino";
+        else if (mGenderMaleView.isChecked()) gender = "Masculino";
 
         // Validate username
         if (TextUtils.isEmpty(username)) {
@@ -180,7 +180,7 @@ public class SignUpActivity extends AppCompatActivity {
             user.setUsername(username);
             user.put("Name", name);
             user.put("Age" , age);
-            user.put("Genre" , genre);
+            user.put("Gender" , gender);
             user.signUpInBackground ( new SignUpCallback() {
                 @Override
                 public void done(com.parse.ParseException e) {

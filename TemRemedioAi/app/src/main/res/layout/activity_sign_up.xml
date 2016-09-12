@@ -81,7 +81,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Sexo"
-                android:id="@+id/textViewGenre"
+                android:id="@+id/textViewGender"
                 android:backgroundTint="@color/colorPrimary"/>
 
             <RadioGroup
