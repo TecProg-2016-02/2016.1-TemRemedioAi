@@ -61,15 +61,23 @@ public class ViewHolderUBS extends RecyclerView.ViewHolder{
     public ViewHolderUBS(CardView card) {
         super(card);
         this.textViewUbsName = (TextView) card.findViewById(R.id.textViewUbsName);
-        this.textViewUbsNeighborhood = (TextView) card.findViewById(R.id.textViewUbsNeighborhood);
-        this.textViewLastInformation1 = (TextView) card.findViewById(R.id.textViewLastInformation1);
-        this.textViewLastInformation2 = (TextView) card.findViewById(R.id.textViewLastInformation2);
-        this.textViewLastInformation3 = (TextView) card.findViewById(R.id.textViewLastInformation3);
-        this.textViewLastInformationTitle = (TextView) card.findViewById(R.id.textViewLastInformationTitle);
-        this.textViewWithoutNotification = (TextView) card.findViewById(R.id.textViewWithoutNotification);
+        this.textViewUbsNeighborhood = (TextView) card.findViewById(R.id
+                .textViewUbsNeighborhood);
+        this.textViewLastInformation1 = (TextView) card.findViewById(R.id
+                .textViewLastInformation1);
+        this.textViewLastInformation2 = (TextView) card.findViewById(R.id
+                .textViewLastInformation2);
+        this.textViewLastInformation3 = (TextView) card.findViewById(R.id
+                .textViewLastInformation3);
+        this.textViewLastInformationTitle = (TextView) card.findViewById(R.id
+                .textViewLastInformationTitle);
+        this.textViewWithoutNotification = (TextView) card.findViewById(R.id
+                .textViewWithoutNotification);
         this.imageViewArrow = (ImageView) card.findViewById(R.id.imageViewArrow);
-        this.buttonSelectMedicine = (Button) card.findViewById(R.id.buttonSelectMedicine);
-        this.buttonViewUbsDescription = (Button) card.findViewById(R.id.buttonUbsDescription);
+        this.buttonSelectMedicine = (Button) card.findViewById(R.id
+                .buttonSelectMedicine);
+        this.buttonViewUbsDescription = (Button) card.findViewById(R.id
+                .buttonUbsDescription);
         this.buttonUbsInform = (Button) card.findViewById(R.id.buttonInformUbs);
         this.expandLayout = (RelativeLayout) card.findViewById(R.id.expandable);
         this.headerLayout = (RelativeLayout) card.findViewById(R.id.header);
@@ -82,7 +90,8 @@ public class ViewHolderUBS extends RecyclerView.ViewHolder{
 
                     @Override
                     public boolean onPreDraw() {
-                        expandLayout.getViewTreeObserver().removeOnPreDrawListener(this);
+                        expandLayout.getViewTreeObserver()
+                                .removeOnPreDrawListener(this);
                         expandLayout.setVisibility(View.GONE);
 
                         final int widthSpec = View.MeasureSpec.makeMeasureSpec(0,
@@ -103,7 +112,8 @@ public class ViewHolderUBS extends RecyclerView.ViewHolder{
                 if (expandLayout.getVisibility() == View.GONE) {
                     Log.i("LOG", "Expand Click");
 
-                    UBS selectItem = CardListAdapterUBS.dataUBS.get(ViewHolderUBS.this.getAdapterPosition());
+                    UBS selectItem = CardListAdapterUBS.dataUBS
+                            .get(ViewHolderUBS.this.getAdapterPosition());
 
                     List<Notification> notificationList = null;
                     notificationList = getNotifications(selectItem);
@@ -111,19 +121,22 @@ public class ViewHolderUBS extends RecyclerView.ViewHolder{
                     haveNotification = false;
                     if (notificationList.size() >= 1) {
                         haveNotification = true;
-                        getTextViewLastInformation1().setText("1. " + generateTextNotification(notificationList.get(0)));
+                        getTextViewLastInformation1().setText("1. " +
+                                generateTextNotification(notificationList.get(0)));
                     } else {
                         getTextViewLastInformation1().setText("");
                     }
 
                     if (notificationList.size() >= 2) {
-                        getTextViewLastInformation2().setText("2. " + generateTextNotification(notificationList.get(1)));
+                        getTextViewLastInformation2().setText("2. " +
+                                generateTextNotification(notificationList.get(1)));
                     } else {
                         getTextViewLastInformation2().setText("");
                     }
 
                     if (notificationList.size() >= 3) {
-                        getTextViewLastInformation3().setText("3. " + generateTextNotification(notificationList.get(2)));
+                        getTextViewLastInformation3().setText("3. " +
+                                generateTextNotification(notificationList.get(2)));
                     } else {
                         getTextViewLastInformation3().setText("");
                     }
@@ -137,7 +150,8 @@ public class ViewHolderUBS extends RecyclerView.ViewHolder{
                     }
 
                     ParseUser getCurrentUser = ParseUser.getCurrentUser();
-                    if (getCurrentUser != null && getButtonUbsInform().getVisibility() == View.VISIBLE) {
+                    if (getCurrentUser != null && getButtonUbsInform()
+                            .getVisibility() == View.VISIBLE) {
                         getButtonUbsInform().setVisibility(View.VISIBLE);
                     } else {
                         getButtonUbsInform().setVisibility(View.GONE);
@@ -153,9 +167,10 @@ public class ViewHolderUBS extends RecyclerView.ViewHolder{
         this.buttonSelectMedicine.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), SelectMedicineActivity.class);
+                Intent intent = new Intent(v.getContext(),
+                        SelectMedicineActivity.class);
                 UBS selectItem = CardListAdapterUBS.dataUBS.get(ViewHolderUBS.this
-                                    .getAdapterPosition());
+                                                                .getAdapterPosition());
                 intent.putExtra("nomeUBS", selectItem.getUbsName());
                 intent.putExtra("nivelAtencao", selectItem.getUbsAttentionLevel());
                 v.getContext().startActivity(intent);
@@ -167,7 +182,7 @@ public class ViewHolderUBS extends RecyclerView.ViewHolder{
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), UbsMapsActivity.class);
                 UBS selectItem = CardListAdapterUBS.dataUBS.get(ViewHolderUBS.this
-                                    .getAdapterPosition());
+                                                                .getAdapterPosition());
                 intent.putExtra("latitude", selectItem.getUbsLatitude());
                 intent.putExtra("longitude", selectItem.getUbsLongitude());
                 intent.putExtra("nomeUBS", selectItem.getUbsName());
@@ -183,7 +198,8 @@ public class ViewHolderUBS extends RecyclerView.ViewHolder{
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), Inform.class);
-                UBS selectItem = CardListAdapterUBS.dataUBS.get(ViewHolderUBS.this.getAdapterPosition());
+                UBS selectItem = CardListAdapterUBS.dataUBS.get(ViewHolderUBS.this
+                                                                .getAdapterPosition());
                 intent.putExtra("UBSName", selectItem.getUbsName());
                 intent.putExtra("MedicineName", medicineSelectedName);
                 intent.putExtra("MedicineDos", medicineSelectedDos);
@@ -204,7 +220,8 @@ public class ViewHolderUBS extends RecyclerView.ViewHolder{
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd MMM yyyy");
 
         dayCalendar.setTime(notification.getDateInform());
-        textOfNotification = textOfNotification + simpleDateFormat.format(dayCalendar.getTime());
+        textOfNotification = textOfNotification + simpleDateFormat
+                                                    .format(dayCalendar.getTime());
 
         return textOfNotification;
     }
@@ -213,12 +230,15 @@ public class ViewHolderUBS extends RecyclerView.ViewHolder{
         List<Notification> listNotification = null;
 
         ParseQuery<Notification> queryNotification = Notification.getQuery();
-        queryNotification.whereEqualTo(Notification.getTitleUBSName(), ubs.getUbsName());
+        queryNotification.whereEqualTo(Notification.getTitleUBSName(),
+                                                        ubs.getUbsName());
         if (!medicineSelectedDos.isEmpty()) {
-            queryNotification.whereEqualTo(Notification.getTitleMedicineDosage(), medicineSelectedDos);
+            queryNotification.whereEqualTo(Notification.getTitleMedicineDosage(),
+                                                                medicineSelectedDos);
         }
         if (!medicineSelectedName.isEmpty()) {
-            queryNotification.whereEqualTo(Notification.getTitleMedicineName(), medicineSelectedName);
+            queryNotification.whereEqualTo(Notification.getTitleMedicineName(),
+                                                                medicineSelectedName);
         }
         queryNotification.orderByDescending(Notification.getTitleDateInform());
         queryNotification.setLimit(3);
@@ -293,11 +313,14 @@ public class ViewHolderUBS extends RecyclerView.ViewHolder{
 
         ParseQuery<Notification> queryNotificationAvailable = Notification.getQuery();
         queryNotificationAvailable.fromLocalDatastore();
-        queryNotificationAvailable.whereEqualTo(Notification.getTitleUBSName(), ubs.getUbsName());
+        queryNotificationAvailable.whereEqualTo(Notification.getTitleUBSName(),
+                                                                ubs.getUbsName());
         queryNotificationAvailable.whereEqualTo(Notification.getTitleAvailable(), true);
         if (medicineSelectedName != "") {
-            queryNotificationAvailable.whereEqualTo(Notification.getTitleMedicineDosage(), medicineSelectedDos);
-            queryNotificationAvailable.whereEqualTo(Notification.getTitleMedicineName(), medicineSelectedName);
+            queryNotificationAvailable.whereEqualTo
+                    (Notification.getTitleMedicineDosage(), medicineSelectedDos);
+            queryNotificationAvailable.whereEqualTo
+                    (Notification.getTitleMedicineName(), medicineSelectedName);
         } else {
             // Nothing to do
         }
@@ -308,13 +331,18 @@ public class ViewHolderUBS extends RecyclerView.ViewHolder{
             e.printStackTrace();
         }
 
-        ParseQuery<Notification> queryNotificationNotAvailable = Notification.getQuery();
+        ParseQuery<Notification> queryNotificationNotAvailable =
+                                                Notification.getQuery();
         queryNotificationNotAvailable.fromLocalDatastore();
-        queryNotificationNotAvailable.whereEqualTo(Notification.getTitleUBSName(), ubs.getUbsName());
-        queryNotificationNotAvailable.whereEqualTo(Notification.getTitleAvailable(), false);
+        queryNotificationNotAvailable.whereEqualTo
+                (Notification.getTitleUBSName(), ubs.getUbsName());
+        queryNotificationNotAvailable.whereEqualTo
+                (Notification.getTitleAvailable(), false);
         if (medicineSelectedName != "") {
-            queryNotificationNotAvailable.whereEqualTo(Notification.getTitleMedicineDosage(), medicineSelectedDos);
-            queryNotificationNotAvailable.whereEqualTo(Notification.getTitleMedicineName(), medicineSelectedName);
+            queryNotificationNotAvailable.whereEqualTo
+                    (Notification.getTitleMedicineDosage(), medicineSelectedDos);
+            queryNotificationNotAvailable.whereEqualTo
+                    (Notification.getTitleMedicineName(), medicineSelectedName);
         } else {
             // Nothing to do
         }
