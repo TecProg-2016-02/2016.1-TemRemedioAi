@@ -185,11 +185,23 @@ public class SignUpActivity extends AppCompatActivity {
         return usernameValid;
     }
 
-    private void attemptRegister() {
+    private String validateChoiceGender(){
+        String gender = "";
 
-        // Reset errors.
-        editTextName.setError(null);
+        if (radioButtonGenderFem.isChecked()) {
+            gender = "Feminino";
+        } else if (radioButtonGenderMale.isChecked()) {
+            gender = "Masculino";
+        } else {
+            // Nothing to do
+        }
+
+        return gender;
+    }
+
+    private void resetErrors(){
         editTextEmail.setError(null);
+        editTextName.setError(null);
         editTextPassword.setError(null);
         editTextPasswordConfirmation.setError(null);
         editTextAge.setError(null);
@@ -197,6 +209,12 @@ public class SignUpActivity extends AppCompatActivity {
         radioButtonGenderFem.setError(null);
         textViewGender.setError(null);
         editTextUsername.setError(null);
+    }
+
+    private void attemptRegister() {
+
+        // Reset errors.
+        resetErrors();
 
         // Store values at the time of the login attempt.
         String email = editTextEmail.getText().toString();
@@ -205,7 +223,7 @@ public class SignUpActivity extends AppCompatActivity {
         String name = editTextName.getText().toString();
         String username = editTextUsername.getText().toString();
         int age = 0;
-        String gender = null;
+        String gender = "";
 
         boolean validPassoword = validatePassoword(password, passwordConfirmation);
         boolean validEmail = validateEmail(email);
@@ -214,13 +232,7 @@ public class SignUpActivity extends AppCompatActivity {
         boolean validGender = validateGender();
 
         // Check gender
-        if (radioButtonGenderFem.isChecked()) {
-            gender = "Feminino";
-        } else if (radioButtonGenderMale.isChecked()) {
-            gender = "Masculino";
-        } else {
-            // Nothing to do
-        }
+        gender = validateChoiceGender();
 
         boolean validUsername = validateUsername(username);
 
