@@ -217,23 +217,24 @@ public class SignUpActivity extends AppCompatActivity {
         resetErrors();
 
         // Store values at the time of the login attempt.
-        String email = editTextEmail.getText().toString();
         String password = editTextPassword.getText().toString();
         String passwordConfirmation = editTextPasswordConfirmation.getText().toString();
-        String name = editTextName.getText().toString();
-        String username = editTextUsername.getText().toString();
-        int age = 0;
-        String gender = "";
-
         boolean validPassoword = validatePassoword(password, passwordConfirmation);
+
+        String email = editTextEmail.getText().toString();
         boolean validEmail = validateEmail(email);
+
+        String name = editTextName.getText().toString();
         boolean validName = validateName(name);
+
+        int age = 0;
         boolean validAge = validateAge(age);
-        boolean validGender = validateGender();
 
         // Check gender
-        gender = validateChoiceGender();
+        boolean validGender = validateGender();
+        String gender = validateChoiceGender();
 
+        String username = editTextUsername.getText().toString();
         boolean validUsername = validateUsername(username);
 
         if (!validPassoword || !validEmail || !validName || !validAge || !validGender || validUsername) {
