@@ -30,6 +30,7 @@ public class SignUpActivity extends AppCompatActivity {
     private TextView textViewGender;
     private Button buttonRegister;
     private Button buttonCancel;
+    private View focusView = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,6 +78,113 @@ public class SignUpActivity extends AppCompatActivity {
 
     }
 
+    private boolean validatePassoword(String password, String passwordConfirmation) {
+        boolean passwordValid = true;
+
+        if (TextUtils.isEmpty(password)) {
+            editTextPassword.setError(getString(R.string.error_field_required));
+            focusView = editTextPassword;
+            passwordValid = false;
+        }
+        else if (password.length() < 6){
+            editTextPassword.setError(getString(R.string.error_invalid_password));
+            focusView = editTextPassword;
+            passwordValid = false;
+        }
+        else if (!password.equals(passwordConfirmation)) {
+            editTextPasswordConfirmation.setError(getString(R.string.error_different_password));
+            focusView = editTextPasswordConfirmation;
+            passwordValid = false;
+        } else {
+            // Nothing to do
+        }
+
+        return passwordValid;
+    }
+
+    private boolean validateEmail(String email) {
+        boolean emailValid = true;
+
+        if (TextUtils.isEmpty(email)) {
+            editTextEmail.setError(getString(R.string.error_field_required));
+            focusView = editTextEmail;
+            emailValid = false;
+        } else if (!isContainValid(email)) {
+            editTextEmail.setError(getString(R.string.error_invalid_email));
+            focusView = editTextEmail;
+            emailValid = false;
+        } else {
+            // Nothing to do
+        }
+
+        return emailValid;
+    }
+
+    private boolean validateName(String name) {
+        boolean nameValid = true;
+
+        if (TextUtils.isEmpty(name)) {
+            editTextName.setError(getString(R.string.error_field_required));
+            focusView = editTextName;
+            nameValid = false;
+        } else if (getSpecialCharacter(name)) {
+            editTextName.setError(getString(R.string.error_character));
+            focusView = editTextName;
+            nameValid = false;
+        } else {
+            // Nothing to do
+        }
+
+        return nameValid;
+    }
+
+    private boolean validateAge(int age) {
+        boolean ageValid = true;
+
+        age = Integer.parseInt(editTextAge.getText().toString());
+        if (TextUtils.isEmpty(editTextAge.getText().toString()) || age < 0 || age > 100) {
+            focusView = editTextAge;
+            ageValid = false;
+            if (age < 0 || age > 100) {
+                editTextAge.setError(getString(R.string.error_invalid_age));
+            } else {
+                editTextAge.setError(getString(R.string.error_field_required));
+            }
+        } else {
+            // Nothing to do
+        }
+
+        return ageValid;
+    }
+
+    private boolean validateGender() {
+        boolean genderValid = true;
+
+        if (!radioButtonGenderMale.isChecked() && !radioButtonGenderFem.isChecked()) {
+            textViewGender.setError(getString(R.string.error_invalid_genre));
+            focusView = textViewGender;
+            genderValid = false;
+        } else {
+            // Nothing to do
+        }
+
+        return genderValid;
+    }
+
+    private boolean validateUsername(String username) {
+        boolean usernameValid = true;
+
+        if (TextUtils.isEmpty(username)) {
+            editTextUsername.setError(getString(R.string.error_field_required));
+            focusView = editTextUsername;
+            usernameValid = false;
+        } else {
+            // Nothing to do
+        }
+
+        return usernameValid;
+    }
+
     private void attemptRegister() {
 
         // Reset errors.
@@ -99,77 +207,24 @@ public class SignUpActivity extends AppCompatActivity {
         int age = 0;
         String gender = null;
 
-        boolean invalidInput = false;
-        View focusView = null;
+        boolean validPassoword = validatePassoword(password, passwordConfirmation);
+        boolean validEmail = validateEmail(email);
+        boolean validName = validateName(name);
+        boolean validAge = validateAge(age);
+        boolean validGender = validateGender();
 
-        // Validate password
-        if (TextUtils.isEmpty(password)) {
-            editTextPassword.setError(getString(R.string.error_field_required));
-            focusView = editTextPassword;
-            invalidInput = true;
-        }
-        else if (password.length() < 6){
-            editTextPassword.setError(getString(R.string.error_invalid_password));
-            focusView = editTextPassword;
-            invalidInput = true;
-        }
-        else if (!password.equals(passwordConfirmation)) {
-            editTextPasswordConfirmation.setError(getString(R.string.error_different_password));
-            focusView = editTextPasswordConfirmation;
-            invalidInput = true;
-        }
-
-        // Validate email
-        if (TextUtils.isEmpty(email)) {
-            editTextEmail.setError(getString(R.string.error_field_required));
-            focusView = editTextEmail;
-            invalidInput = true;
-        } else if (!isContainValid(email)) {
-            editTextEmail.setError(getString(R.string.error_invalid_email));
-            focusView = editTextEmail;
-            invalidInput = true;
-        }
-
-        // Validate name
-        if (TextUtils.isEmpty(name)) {
-            editTextName.setError(getString(R.string.error_field_required));
-            focusView = editTextName;
-            invalidInput = true;
-        } else if (getSpecialCharacter(name)) {
-            editTextName.setError(getString(R.string.error_character));
-            focusView = editTextName;
-            invalidInput = true;
-        }
-
-        // Validate age
-        if (TextUtils.isEmpty(editTextAge.getText().toString())) {
-            editTextAge.setError(getString(R.string.error_field_required));
-            focusView = editTextAge;
-            invalidInput = true;
+        // Check gender
+        if (radioButtonGenderFem.isChecked()) {
+            gender = "Feminino";
+        } else if (radioButtonGenderMale.isChecked()) {
+            gender = "Masculino";
         } else {
-            age = Integer.parseInt(editTextAge.getText().toString());
-            if (age < 0 || age > 100) {
-                editTextAge.setError(getString(R.string.error_invalid_age));
-            }
+            // Nothing to do
         }
 
-        // Validate gender
-        if (!radioButtonGenderMale.isChecked() && !radioButtonGenderFem.isChecked()) {
-            textViewGender.setError(getString(R.string.error_invalid_genre));
-            focusView = textViewGender;
-            invalidInput = true;
-        }
-        else if (radioButtonGenderFem.isChecked()) gender = "Feminino";
-        else if (radioButtonGenderMale.isChecked()) gender = "Masculino";
+        boolean validUsername = validateUsername(username);
 
-        // Validate username
-        if (TextUtils.isEmpty(username)) {
-            editTextUsername.setError(getString(R.string.error_field_required));
-            focusView = editTextUsername;
-            invalidInput = true;
-        }
-
-        if (invalidInput) {
+        if (!validPassoword || !validEmail || !validName || !validAge || !validGender || validUsername) {
             // Show errors for user
             focusView.requestFocus();
 
