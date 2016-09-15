@@ -19,17 +19,17 @@ public class SignUpActivity extends AppCompatActivity {
 
     ParseUser user = new ParseUser();
 
-    private EditText mEmailView;
-    private EditText mPasswordView;
-    private EditText mPasswordViewConfirmation;
-    private EditText mAgeView;
-    private EditText mNameView;
-    private EditText mUsernameView;
-    private RadioButton mGenderMaleView;
-    private RadioButton mGenderFemView;
-    private TextView mGender;
-    private Button mRegisterButton;
-    private Button cancelButton;
+    private EditText editTextEmail;
+    private EditText editTextPassword;
+    private EditText editTextPasswordConfirmation;
+    private EditText editTextAge;
+    private EditText editTextName;
+    private EditText editTextUsername;
+    private RadioButton radioButtonGenderMale;
+    private RadioButton radioButtonGenderFem;
+    private TextView textViewGender;
+    private Button buttonRegister;
+    private Button buttonCancel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,32 +43,32 @@ public class SignUpActivity extends AppCompatActivity {
 
     private void setValues() {
 
-        mNameView = (EditText) findViewById(R.id.name);
-        mEmailView = (EditText) findViewById(R.id.email);
-        mAgeView = (EditText) findViewById(R.id.ageText);
-        mPasswordView = (EditText) findViewById(R.id.password);
-        mUsernameView = (EditText) findViewById(R.id.username);
-        mPasswordViewConfirmation = (EditText) findViewById(R.id.password2);
+        editTextName = (EditText) findViewById(R.id.name);
+        editTextEmail = (EditText) findViewById(R.id.email);
+        editTextAge = (EditText) findViewById(R.id.ageText);
+        editTextPassword = (EditText) findViewById(R.id.password);
+        editTextUsername = (EditText) findViewById(R.id.username);
+        editTextPasswordConfirmation = (EditText) findViewById(R.id.password2);
 
-        mGender = (TextView) findViewById(R.id.textViewGender);
+        textViewGender = (TextView) findViewById(R.id.textViewGender);
 
-        mGenderFemView = (RadioButton) findViewById(R.id.femButton);
-        mGenderMaleView = (RadioButton) findViewById(R.id.mascButton);
+        radioButtonGenderFem = (RadioButton) findViewById(R.id.femButton);
+        radioButtonGenderMale = (RadioButton) findViewById(R.id.mascButton);
 
-        mRegisterButton = (Button) findViewById(R.id.register_button);
-        cancelButton = (Button) findViewById(R.id.register_cancel);
+        buttonRegister = (Button) findViewById(R.id.register_button);
+        buttonCancel = (Button) findViewById(R.id.register_cancel);
 
     }
 
     private void setListener() {
 
-        mRegisterButton.setOnClickListener(new View.OnClickListener() {
+        buttonRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 attemptRegister();
             }
         });
-        cancelButton.setOnClickListener(new View.OnClickListener() {
+        buttonCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 finish();
@@ -80,96 +80,96 @@ public class SignUpActivity extends AppCompatActivity {
     private void attemptRegister() {
 
         // Reset errors.
-        mNameView.setError(null);
-        mEmailView.setError(null);
-        mPasswordView.setError(null);
-        mPasswordViewConfirmation.setError(null);
-        mAgeView.setError(null);
-        mGenderMaleView.setError(null);
-        mGenderFemView.setError(null);
-        mGender.setError(null);
-        mUsernameView.setError(null);
+        editTextName.setError(null);
+        editTextEmail.setError(null);
+        editTextPassword.setError(null);
+        editTextPasswordConfirmation.setError(null);
+        editTextAge.setError(null);
+        radioButtonGenderMale.setError(null);
+        radioButtonGenderFem.setError(null);
+        textViewGender.setError(null);
+        editTextUsername.setError(null);
 
         // Store values at the time of the login attempt.
-        String email = mEmailView.getText().toString();
-        String password = mPasswordView.getText().toString();
-        String passwordConfirmation = mPasswordViewConfirmation.getText().toString();
-        String name = mNameView.getText().toString();
-        String username = mUsernameView.getText().toString();
+        String email = editTextEmail.getText().toString();
+        String password = editTextPassword.getText().toString();
+        String passwordConfirmation = editTextPasswordConfirmation.getText().toString();
+        String name = editTextName.getText().toString();
+        String username = editTextUsername.getText().toString();
         int age = 0;
         String gender = null;
 
-        boolean cancel = false;
+        boolean invalidInput = false;
         View focusView = null;
 
         // Validate password
         if (TextUtils.isEmpty(password)) {
-            mPasswordView.setError(getString(R.string.error_field_required));
-            focusView = mPasswordView;
-            cancel = true;
+            editTextPassword.setError(getString(R.string.error_field_required));
+            focusView = editTextPassword;
+            invalidInput = true;
         }
         else if (password.length() < 6){
-            mPasswordView.setError(getString(R.string.error_invalid_password));
-            focusView = mPasswordView;
-            cancel = true;
+            editTextPassword.setError(getString(R.string.error_invalid_password));
+            focusView = editTextPassword;
+            invalidInput = true;
         }
         else if (!password.equals(passwordConfirmation)) {
-            mPasswordViewConfirmation.setError(getString(R.string.error_different_password));
-            focusView = mPasswordViewConfirmation;
-            cancel = true;
+            editTextPasswordConfirmation.setError(getString(R.string.error_different_password));
+            focusView = editTextPasswordConfirmation;
+            invalidInput = true;
         }
 
         // Validate email
         if (TextUtils.isEmpty(email)) {
-            mEmailView.setError(getString(R.string.error_field_required));
-            focusView = mEmailView;
-            cancel = true;
+            editTextEmail.setError(getString(R.string.error_field_required));
+            focusView = editTextEmail;
+            invalidInput = true;
         } else if (!isContainValid(email)) {
-            mEmailView.setError(getString(R.string.error_invalid_email));
-            focusView = mEmailView;
-            cancel = true;
+            editTextEmail.setError(getString(R.string.error_invalid_email));
+            focusView = editTextEmail;
+            invalidInput = true;
         }
 
         // Validate name
         if (TextUtils.isEmpty(name)) {
-            mNameView.setError(getString(R.string.error_field_required));
-            focusView = mNameView;
-            cancel = true;
+            editTextName.setError(getString(R.string.error_field_required));
+            focusView = editTextName;
+            invalidInput = true;
         } else if (getSpecialCharacter(name)) {
-            mNameView.setError(getString(R.string.error_character));
-            focusView = mNameView;
-            cancel = true;
+            editTextName.setError(getString(R.string.error_character));
+            focusView = editTextName;
+            invalidInput = true;
         }
 
         // Validate age
-        if (TextUtils.isEmpty(mAgeView.getText().toString())) {
-            mAgeView.setError(getString(R.string.error_field_required));
-            focusView = mAgeView;
-            cancel = true;
+        if (TextUtils.isEmpty(editTextAge.getText().toString())) {
+            editTextAge.setError(getString(R.string.error_field_required));
+            focusView = editTextAge;
+            invalidInput = true;
         } else {
-            age = Integer.parseInt(mAgeView.getText().toString());
+            age = Integer.parseInt(editTextAge.getText().toString());
             if (age < 0 || age > 100) {
-                mAgeView.setError(getString(R.string.error_invalid_age));
+                editTextAge.setError(getString(R.string.error_invalid_age));
             }
         }
 
         // Validate gender
-        if (!mGenderMaleView.isChecked() && !mGenderFemView.isChecked()) {
-            mGender.setError(getString(R.string.error_invalid_genre));
-            focusView = mGender;
-            cancel = true;
+        if (!radioButtonGenderMale.isChecked() && !radioButtonGenderFem.isChecked()) {
+            textViewGender.setError(getString(R.string.error_invalid_genre));
+            focusView = textViewGender;
+            invalidInput = true;
         }
-        else if (mGenderFemView.isChecked()) gender = "Feminino";
-        else if (mGenderMaleView.isChecked()) gender = "Masculino";
+        else if (radioButtonGenderFem.isChecked()) gender = "Feminino";
+        else if (radioButtonGenderMale.isChecked()) gender = "Masculino";
 
         // Validate username
         if (TextUtils.isEmpty(username)) {
-            mUsernameView.setError(getString(R.string.error_field_required));
-            focusView = mUsernameView;
-            cancel = true;
+            editTextUsername.setError(getString(R.string.error_field_required));
+            focusView = editTextUsername;
+            invalidInput = true;
         }
 
-        if (cancel) {
+        if (invalidInput) {
             // Show errors for user
             focusView.requestFocus();
 
@@ -197,8 +197,8 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     public boolean getSpecialCharacter(String word) {
-        Pattern pattern = Pattern.compile("[^A-Za-z0-9]");
-        Matcher matcher = pattern.matcher(word);
+        Pattern regex = Pattern.compile("[^A-Za-z0-9]");
+        Matcher matcher = regex.matcher(word);
         return matcher.find();
     }
 
