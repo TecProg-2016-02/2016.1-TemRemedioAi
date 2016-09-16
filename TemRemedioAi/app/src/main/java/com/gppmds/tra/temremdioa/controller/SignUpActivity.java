@@ -37,7 +37,10 @@ public class SignUpActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
 
+        // Sets the inputs values
         setValues();
+
+        // Sets the actions of buttons
         setListener();
 
     }
@@ -213,27 +216,31 @@ public class SignUpActivity extends AppCompatActivity {
 
     private void attemptRegister() {
 
-        // Reset errors.
         resetErrors();
 
         // Store values at the time of the login attempt.
+        // Checks inputs password
         String password = editTextPassword.getText().toString();
         String passwordConfirmation = editTextPasswordConfirmation.getText().toString();
         boolean validPassoword = validatePassoword(password, passwordConfirmation);
 
+        // Checks inputs email
         String email = editTextEmail.getText().toString();
         boolean validEmail = validateEmail(email);
 
+        // Checks inputs name
         String name = editTextName.getText().toString();
         boolean validName = validateName(name);
 
+        // Checks inputs age
         int age = 0;
         boolean validAge = validateAge(age);
 
-        // Check gender
+        // Check inputs gender
         boolean validGender = validateGender();
         String gender = validateChoiceGender();
 
+        // Checks inputs username
         String username = editTextUsername.getText().toString();
         boolean validUsername = validateUsername(username);
 
