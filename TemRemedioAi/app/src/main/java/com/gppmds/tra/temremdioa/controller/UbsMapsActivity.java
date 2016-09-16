@@ -27,7 +27,7 @@ public class UbsMapsActivity extends AppCompatActivity implements OnMapReadyCall
     private Double longitude;
     private String ubsName;
 
-    private static final int LATLNGZOOM = 13;
+    private static final int LAT_LONG_ZOOM = 13;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -158,6 +158,6 @@ public class UbsMapsActivity extends AppCompatActivity implements OnMapReadyCall
         /* Get latitude and longitude to create a marker on map */
         LatLng latLngValues = new LatLng(latitude, longitude);
         mMap.addMarker(new MarkerOptions().position(latLngValues).title(ubsName));
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLngValues, LATLNGZOOM));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLngValues, LAT_LONG_ZOOM));
     }
 }
