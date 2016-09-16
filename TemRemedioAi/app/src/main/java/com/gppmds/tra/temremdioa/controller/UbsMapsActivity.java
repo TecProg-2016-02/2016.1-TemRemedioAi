@@ -47,7 +47,8 @@ public class UbsMapsActivity extends AppCompatActivity implements OnMapReadyCall
     }
 
     private void obtainSupportMapFragment () {
-        MapFragment mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.map);
+        MapFragment mapFragment = (MapFragment) getFragmentManager()
+                                                    .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
     };
 
@@ -78,7 +79,8 @@ public class UbsMapsActivity extends AppCompatActivity implements OnMapReadyCall
 
     private void gettingUbsNeighborhood() {
         String descUbsNeighborhood = getIntent().getStringExtra("descBairroUBS");
-        TextView editDscNeighborhood = (TextView) findViewById(R.id.textViewUbsNeighborhood);
+        TextView editDscNeighborhood = (TextView)
+                                            findViewById(R.id.textViewUbsNeighborhood);
         editDscNeighborhood.setText(descUbsNeighborhood);
     }
 
@@ -108,8 +110,10 @@ public class UbsMapsActivity extends AppCompatActivity implements OnMapReadyCall
     private void setUpMapIfNeeded() {
         if(isGoogleMapsInstalled()) {
             /* Get latitude and longitude from ubs Holder and open with GMaps */
-            String uri = "http://maps.google.com/maps?saddr="+"&daddr="+latitude+","+longitude;
-            Intent intent = new Intent(android.content.Intent.ACTION_VIEW, Uri.parse(uri));
+            String uri = "http://maps.google.com/maps?saddr="+"&daddr="+latitude+","
+                                                                       +longitude;
+            Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
+                                                                Uri.parse(uri));
             intent.setClassName("com.google.android.apps.maps",
                                 "com.google.android.maps.MapsActivity");
             startActivity(intent);
