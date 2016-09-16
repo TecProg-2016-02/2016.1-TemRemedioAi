@@ -1,3 +1,8 @@
+/*
+ * File: MedicineFragment.java
+ * Purpose: Consult the medication on parse
+ */
+
 package com.gppmds.tra.temremdioa.controller.fragment;
 
 import android.os.Bundle;
@@ -17,19 +22,22 @@ import com.tra.gppmds.temremdioa.R;
 import java.util.List;
 
 
-public class MedicineFragment extends Fragment{
+public class MedicineFragment extends Fragment {
 
     private RecyclerView medicineRecyclerView;
+    
     public static CardListAdapterMedicine medicineAdapter;
 
-    public MedicineFragment(){
+    public MedicineFragment() {
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
         View rootView = inflater.inflate(R.layout.fragment_medicine, container, false);
 
-        medicineAdapter = new CardListAdapterMedicine(MedicineFragment.this.getContext(), getListOfMedicines());
+        medicineAdapter = new CardListAdapterMedicine(MedicineFragment.this.getContext(),getListOfMedicines());
         medicineAdapter.setShowButtonInform(false);
         medicineAdapter.setUbsName("");
 
@@ -42,26 +50,31 @@ public class MedicineFragment extends Fragment{
     }
 
     public List<Medicine> getListOfMedicines() {
-        /* Query medicine data from parse */
+
+        final int limitMedicines = 1000;
+
+        // Query medicine data from parse
         ParseQuery<Medicine> queryMedicine = Medicine.getQuery();
         queryMedicine.fromLocalDatastore();
-        queryMedicine.setLimit(1000);
+        queryMedicine.setLimit(limitMedicines);
         List<Medicine> medicines = null;
 
         try {
             medicines = queryMedicine.find();
-        } catch (ParseException e) {
-            e.printStackTrace();
+        } catch (ParseException exception) {
+            exception.printStackTrace();
         }
 
         return medicines;
     }
 
-    public static MedicineFragment newInstance(){
+    public static MedicineFragment newInstance() {
+
         return new MedicineFragment();
     }
 
     public static CardListAdapterMedicine getMedicineAdapter() {
+
         return medicineAdapter;
     }
 }
