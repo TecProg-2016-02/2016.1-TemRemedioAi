@@ -1,3 +1,8 @@
+/*
+ * File: UBSFragment.java
+ * Purpose: Consult the UBS (Basic Health Unit) on parse
+ */
+
 package com.gppmds.tra.temremdioa.controller.fragment;
 
 import android.os.Bundle;
@@ -16,16 +21,19 @@ import com.tra.gppmds.temremdioa.R;
 
 import java.util.List;
 
-public class UBSFragment extends Fragment{
+public class UBSFragment extends Fragment {
 
     private RecyclerView ubsRecyclerView;
+
     private static CardListAdapterUBS ubsAdapter;
 
-    public static UBSFragment newInstance(){
+    public static UBSFragment newInstance() {
+
         return new UBSFragment();
     }
 
     public static CardListAdapterUBS getUbsAdapter() {
+
         return ubsAdapter;
     }
 
@@ -33,9 +41,9 @@ public class UBSFragment extends Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View rootView = inflater.inflate(R.layout.fragment_ubs, container, false);
+        View rootView = inflater.inflate (R.layout.fragment_ubs, container, false);
 
-        ubsAdapter = new CardListAdapterUBS(UBSFragment.this.getContext(), getListOfUBS());
+        ubsAdapter = new CardListAdapterUBS (UBSFragment.this.getContext(), getListOfUBS());
         ubsAdapter.setShowButtonInform(false);
         ubsAdapter.setMedicineName("");
         ubsAdapter.setMedicineDos("");
@@ -48,8 +56,9 @@ public class UBSFragment extends Fragment{
         return rootView;
     }
 
-    public List<UBS> getListOfUBS(){
-        /* Query UBS data from parse */
+    public List<UBS> getListOfUBS() {
+
+        // Query UBS data from parse
         ParseQuery<UBS> queryUBS = UBS.getQuery();
         queryUBS.fromLocalDatastore();
         queryUBS.orderByAscending(UBS.getUbsNameTitle());
@@ -57,9 +66,8 @@ public class UBSFragment extends Fragment{
 
         try {
             ubsList = queryUBS.find();
-
-        } catch (ParseException e) {
-            e.printStackTrace();
+        } catch (ParseException exception) {
+            exception.printStackTrace();
         }
 
         return ubsList;
