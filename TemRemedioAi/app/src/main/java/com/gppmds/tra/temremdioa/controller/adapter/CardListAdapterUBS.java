@@ -1,3 +1,8 @@
+/*
+ * File: CardListAdapterUBS.java
+ * Purpose:
+ */
+
 package com.gppmds.tra.temremdioa.controller.adapter;
 
 import android.content.Context;
@@ -15,20 +20,20 @@ import com.tra.gppmds.temremdioa.R;
 import java.util.List;
 
 public class CardListAdapterUBS extends RecyclerView.Adapter<ViewHolderUBS> implements Filterable{
+
     public static List<UBS> dataUBS;
+
     List<UBS> filterDataUBS;
-    private static Context contextOpen;
+
+
     FilterSearchUBS filter;
 
-    private Boolean showButtonMedicines;
-    private Boolean showButtonInform;
-    private String medicineName;
-    private String medicineDos;
-
     public CardListAdapterUBS(Context context, List<UBS> dataUBS) {
+
         this.contextOpen = context;
         this.dataUBS = dataUBS;
         this.filterDataUBS = dataUBS;
+
         setShowButtonMedicines(true);
         setShowButtonInform(false);
         setMedicineName("");
@@ -37,6 +42,7 @@ public class CardListAdapterUBS extends RecyclerView.Adapter<ViewHolderUBS> impl
 
     @Override
     public FilterSearchUBS getFilter() {
+
         if(filter == null) {
             filter = new FilterSearchUBS(filterDataUBS, this);
         } else {
@@ -48,6 +54,7 @@ public class CardListAdapterUBS extends RecyclerView.Adapter<ViewHolderUBS> impl
 
     @Override
     public ViewHolderUBS onCreateViewHolder(ViewGroup parent, int viewType) {
+
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         CardView view = (CardView) inflater.inflate(R.layout.card_list_ubs, parent, false);
         return new ViewHolderUBS(view);
@@ -55,6 +62,7 @@ public class CardListAdapterUBS extends RecyclerView.Adapter<ViewHolderUBS> impl
 
     @Override
     public void onBindViewHolder(ViewHolderUBS holder, int position) {
+
         UBS rowData = this.dataUBS.get(position);
         holder.getTextViewUbsName().setText(rowData.getUbsName());
         holder.getTextViewUbsNeighborhood().setText(rowData.getUbsNeighborhood());
@@ -89,19 +97,18 @@ public class CardListAdapterUBS extends RecyclerView.Adapter<ViewHolderUBS> impl
     }
 
     public void setShowButtonMedicines(Boolean showButtonMedicines) {
+
         this.showButtonMedicines = showButtonMedicines;
     }
 
-    private Boolean getShowButtonMedicines() {
-        return this.showButtonMedicines;
-    }
-
     public void createFilter() {
+
         filter = new FilterSearchUBS(filterDataUBS, this);
         Boolean test = getShowButtonMedicines();
     }
 
     public void setShowButtonInform(boolean showButtonInform) {
+
         this.showButtonInform = showButtonInform;
     }
 
@@ -113,15 +120,33 @@ public class CardListAdapterUBS extends RecyclerView.Adapter<ViewHolderUBS> impl
         this.medicineName = medicineName;
     }
 
-    public String getMedicineName(){
+    public String getMedicineName() {
+
         return this.medicineName;
     }
 
     public void setMedicineDos(String medicineDos) {
+
         this.medicineDos= medicineDos;
     }
 
     public String getMedicineDos(){
+
         return this.medicineDos;
+    }
+
+    private static Context contextOpen;
+
+    private Boolean showButtonMedicines;
+
+    private Boolean showButtonInform;
+
+    private String medicineName;
+
+    private String medicineDos;
+
+    private Boolean getShowButtonMedicines() {
+
+        return this.showButtonMedicines;
     }
 }
