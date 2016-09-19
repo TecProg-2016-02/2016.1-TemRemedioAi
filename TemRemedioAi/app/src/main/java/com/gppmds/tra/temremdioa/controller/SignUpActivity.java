@@ -19,21 +19,45 @@ public class SignUpActivity extends AppCompatActivity {
 
     ParseUser user = new ParseUser();
 
+    public boolean getSpecialCharacter(String word) {
+
+        Pattern regex = Pattern.compile("[^A-Za-z0-9]");
+        Matcher matcher = regex.matcher(word);
+        return matcher.find();
+    }
+
+    public boolean isContainValid(String email) {
+
+        return email.contains("@");
+    }
+
     private EditText editTextEmail;
+
     private EditText editTextPassword;
+
     private EditText editTextPasswordConfirmation;
+
     private EditText editTextAge;
+
     private EditText editTextName;
+
     private EditText editTextUsername;
+
     private RadioButton radioButtonGenderMale;
+
     private RadioButton radioButtonGenderFem;
+
     private TextView textViewGender;
+
     private Button buttonRegister;
+
     private Button buttonCancel;
+
     private View focusView = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
 
@@ -42,7 +66,6 @@ public class SignUpActivity extends AppCompatActivity {
 
         // Sets the actions of buttons
         setListener();
-
     }
 
     private void setValues() {
@@ -61,7 +84,6 @@ public class SignUpActivity extends AppCompatActivity {
 
         buttonRegister = (Button) findViewById(R.id.register_button);
         buttonCancel = (Button) findViewById(R.id.register_cancel);
-
     }
 
     private void setListener() {
@@ -83,13 +105,14 @@ public class SignUpActivity extends AppCompatActivity {
 
     private boolean validatePassoword(String password, String passwordConfirmation) {
         boolean passwordValid = true;
+        int minimumSize = 6;
 
         if (TextUtils.isEmpty(password)) {
             editTextPassword.setError(getString(R.string.error_field_required));
             focusView = editTextPassword;
             passwordValid = false;
         }
-        else if (password.length() < 6){
+        else if (password.length() < minimumSize){
             editTextPassword.setError(getString(R.string.error_invalid_password));
             focusView = editTextPassword;
             passwordValid = false;
@@ -143,12 +166,14 @@ public class SignUpActivity extends AppCompatActivity {
 
     private boolean validateAge(int age) {
         boolean ageValid = true;
+        int minimumAge = 0;
+        int maximumAge = 100;
 
         age = Integer.parseInt(editTextAge.getText().toString());
-        if (TextUtils.isEmpty(editTextAge.getText().toString()) || age < 0 || age > 100) {
+        if (TextUtils.isEmpty(editTextAge.getText().toString()) || age < minimumAge || age > maximumAge) {
             focusView = editTextAge;
             ageValid = false;
-            if (age < 0 || age > 100) {
+            if (age < minimumAge || age > maximumAge) {
                 editTextAge.setError(getString(R.string.error_invalid_age));
             } else {
                 editTextAge.setError(getString(R.string.error_field_required));
@@ -271,13 +296,5 @@ public class SignUpActivity extends AppCompatActivity {
         }
     }
 
-    public boolean getSpecialCharacter(String word) {
-        Pattern regex = Pattern.compile("[^A-Za-z0-9]");
-        Matcher matcher = regex.matcher(word);
-        return matcher.find();
-    }
 
-    public boolean isContainValid(String email) {
-        return email.contains("@");
-    }
 }
