@@ -63,10 +63,11 @@ public class LogInActivity extends AppCompatActivity implements LoaderCallbacks<
     }
 
     protected void facebookSDKInitialize() {
+
         callbackManager = CallbackManager.Factory.create();
     }
 
-    public ParseUser getCurrentUser(){
+    public ParseUser getCurrentUser() {
 
         ParseUser currentUser = ParseUser.getCurrentUser();
 
@@ -148,6 +149,7 @@ public class LogInActivity extends AppCompatActivity implements LoaderCallbacks<
 
         @Override
         protected void onCancelled() {
+
             mAuthTask = null;
             showProgress(false);
         }
@@ -182,6 +184,7 @@ public class LogInActivity extends AppCompatActivity implements LoaderCallbacks<
 
         finish();
     }
+
     // res references
     private TextView info;
 
@@ -205,6 +208,7 @@ public class LogInActivity extends AppCompatActivity implements LoaderCallbacks<
     private UserLoginTask mAuthTask = null;
 
     private void setListener() {
+
         mFacebookButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
