@@ -29,10 +29,11 @@ import static com.facebook.AccessToken.getCurrentAccessToken;
 public class MainActivity extends AppCompatActivity{
 
     public SearchView searchView;
-    private GoogleApiClient client;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         FacebookSdk.sdkInitialize(getApplicationContext());
         setContentView(R.layout.activity_main);
@@ -54,7 +55,8 @@ public class MainActivity extends AppCompatActivity{
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        /* Inflate the menu; this adds items to the action bar if it is present */
+
+        // Inflate the menu; this adds items to the action bar if it is present
         getMenuInflater().inflate(R.menu.menu_main, menu);
 
         searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
@@ -79,6 +81,7 @@ public class MainActivity extends AppCompatActivity{
 
 
     public DialogInterface.OnClickListener logout() {
+
         return new DialogInterface.OnClickListener() {
 
             @Override
@@ -87,13 +90,13 @@ public class MainActivity extends AppCompatActivity{
                 ParseUser.logOut();
                 Toast.makeText(getApplicationContext(), "Deslogado com sucesso!", Toast.LENGTH_SHORT).show();
 
-
             }
         };
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+
         switch (item.getItemId()) {
             case R.id.action_login:
                  ParseUser currentUser = ParseUser.getCurrentUser();
@@ -122,14 +125,18 @@ public class MainActivity extends AppCompatActivity{
                 Intent aboutActivity = new Intent(this, AboutActivity.class);
                 startActivity(aboutActivity);
                 break;
+
             default:
-                /* Nothing to do */
+                // Nothing to do
                 break;
         }
         return super.onOptionsItemSelected(item);
     }
 
-    public GoogleApiClient createClient(){
+    public GoogleApiClient createClient() {
+
         return new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
+
+    private GoogleApiClient client;
 }
