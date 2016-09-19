@@ -20,20 +20,15 @@ public class Inform extends AppCompatActivity {
 
     TextView textViewInformedMedicine;
     TextView textViewInformedUbs;
-    TextView textViewAvailableError;
     RadioButton radioButtonAvailable;
     RadioButton radioButtonNotAvailable;
     Button informButton;
     Button cancelButton;
     DatePicker datePickerInform;
 
-    private Boolean availability;
-    private String ubsName;
-    private String medicineName;
-    private String medicineDos;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.inform);
 
@@ -67,7 +62,6 @@ public class Inform extends AppCompatActivity {
         textViewInformedMedicine.setText(medicineName);
         textViewInformedUbs = (TextView) findViewById(R.id.informed_ubs);
         textViewInformedUbs.setText(ubsName);
-//        textViewAvailableError = (TextView) findViewById(R.id.)
 
         radioButtonAvailable = (RadioButton) findViewById(R.id.available);
         radioButtonNotAvailable = (RadioButton) findViewById(R.id.not_available);
@@ -106,14 +100,22 @@ public class Inform extends AppCompatActivity {
     }
 
     private boolean validateInform() {
+
         boolean returnValidate = true;
         if (!radioButtonAvailable.isChecked() && !radioButtonNotAvailable.isChecked()) {
             radioButtonAvailable.setError("Disponibilidade não selecionada");
             returnValidate = false;
         }
-        // Validar data;
+        // Validate data;
 
         return returnValidate;
     }
 
+    private Boolean availability;
+
+    private String ubsName;
+
+    private String medicineName;
+
+    private String medicineDos;
 }
