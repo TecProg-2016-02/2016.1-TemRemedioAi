@@ -29,15 +29,9 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
-import com.facebook.FacebookSdk;
-import com.facebook.GraphRequest;
-import com.facebook.GraphResponse;
-import com.facebook.HttpMethod;
-import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.parse.LogInCallback;
@@ -85,8 +79,8 @@ public class LogInActivity extends AppCompatActivity implements LoaderCallbacks<
 
     public void setValues() {
 
-        mUsernameView = (EditText) findViewById(R.id.log_in_username_field);
-        mPasswordView = (EditText) findViewById(R.id.log_in_password_field);
+        editTextUsernameView = (EditText) findViewById(R.id.log_in_username_field);
+        editTextPasswordView = (EditText) findViewById(R.id.log_in_password_field);
 
         mUsernameSignInButton = (Button) findViewById(R.id.log_in_button);
         mRegisterButton = (Button) findViewById(R.id.log_in_sign_in_button);
@@ -94,8 +88,8 @@ public class LogInActivity extends AppCompatActivity implements LoaderCallbacks<
         info = (TextView)findViewById(R.id.info);
         mFacebookButton = (LoginButton) findViewById(R.id.login_button_fb);
 
-        mLoginFormView = (View) findViewById(R.id.log_in_form);
-        mProgressView = (ProgressBar) findViewById(R.id.log_in_progress_bar);
+        viewLoginFormView = (View) findViewById(R.id.log_in_form);
+        progressiveBarProgressView = (ProgressBar) findViewById(R.id.log_in_progress_bar);
 
     }
 
@@ -142,8 +136,8 @@ public class LogInActivity extends AppCompatActivity implements LoaderCallbacks<
             if (success) {
                 finish();
             } else {
-                mPasswordView.setError(getString(R.string.error_incorrect_password));
-                mPasswordView.requestFocus();
+                editTextPasswordView.setError(getString(R.string.error_incorrect_password));
+                editTextPasswordView.requestFocus();
             }
         }
 
@@ -188,13 +182,13 @@ public class LogInActivity extends AppCompatActivity implements LoaderCallbacks<
     // res references
     private TextView info;
 
-    private EditText mUsernameView;
+    private EditText editTextUsernameView;
 
-    private EditText mPasswordView;
+    private EditText editTextPasswordView;
 
-    private ProgressBar mProgressView;
+    private ProgressBar progressiveBarProgressView;
 
-    private View mLoginFormView;
+    private View viewLoginFormView;
 
     private View focusView = null;
 
@@ -229,7 +223,7 @@ public class LogInActivity extends AppCompatActivity implements LoaderCallbacks<
             }
         });
 
-        mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+        editTextPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
 
@@ -262,15 +256,15 @@ public class LogInActivity extends AppCompatActivity implements LoaderCallbacks<
     private void attemptLogin(){
 
         // Store values at the time of the login attempt
-        final String username = mUsernameView.getText().toString();
-        String password = mPasswordView.getText().toString();
+        final String username = editTextUsernameView.getText().toString();
+        String password = editTextPasswordView.getText().toString();
 
         if (mAuthTask != null){
             return;
         }
 
-        if ((validateError(username, "Ops! Campo de username esta vazio.", mUsernameView) ||
-                validateError(password, "Ops! Campo do password esta vazio.", mPasswordView))) {
+        if ((validateError(username, "Ops! Campo de username esta vazio.", editTextUsernameView) ||
+                validateError(password, "Ops! Campo do password esta vazio.", editTextPasswordView))) {
 
             focusView.requestFocus();
         } else {
@@ -300,35 +294,37 @@ public class LogInActivity extends AppCompatActivity implements LoaderCallbacks<
     private void showProgress(final boolean show) {
         // Honeycombe api use to show progress bar
 
-        mProgressView.getIndeterminateDrawable().setColorFilter(Color.RED,
+        progressiveBarProgressView.getIndeterminateDrawable().setColorFilter(Color.RED,
                 android.graphics.PorterDuff.Mode.SRC_IN);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
             int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
 
-            mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
-            mLoginFormView.animate().setDuration(shortAnimTime).alpha(
+            viewLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
+                
+
+            viewLoginFormView.animate().setDuration(shortAnimTime).alpha(
                     show ? 0 : 1).setListener(new AnimatorListenerAdapter() {
                 @Override
                 public void onAnimationEnd(Animator animation) {
-                    mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
+                    viewLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
                 }
             });
 
-            mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
-            mProgressView.animate().setDuration(shortAnimTime).alpha(
+            progressiveBarProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
+            progressiveBarProgressView.animate().setDuration(shortAnimTime).alpha(
                     show ? 1 : 0).setListener(new AnimatorListenerAdapter() {
                 @Override
                 public void onAnimationEnd(Animator animation) {
 
-                    mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
+                    progressiveBarProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
                 }
             });
         } else {
             /* The ViewPropertyAnimator APIs are not available, so simply show
                and hide the relevant UI components.*/
-            mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
-            mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
+            progressiveBarProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
+            viewLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
         }
     }
 
