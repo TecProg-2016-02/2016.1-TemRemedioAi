@@ -1,3 +1,8 @@
+/*
+ * File: SplashScreenActivity.java
+ * Purpose: Create and open the splash screen
+ */
+
 package com.gppmds.tra.temremdioa.controller;
 
 import android.app.Activity;
