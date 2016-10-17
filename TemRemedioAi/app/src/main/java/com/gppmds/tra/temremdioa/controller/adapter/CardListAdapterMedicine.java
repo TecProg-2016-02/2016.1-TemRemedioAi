@@ -1,6 +1,6 @@
 /*
  * File: CardListAdapterMedicine.java
- * Purpose:
+ * Purpose: Shows the list of Medicines available.
  */
 
 package com.gppmds.tra.temremdioa.controller.adapter;
