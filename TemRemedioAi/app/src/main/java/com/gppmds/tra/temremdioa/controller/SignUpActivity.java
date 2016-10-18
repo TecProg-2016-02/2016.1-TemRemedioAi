@@ -1,3 +1,8 @@
+/*
+ * File: SignUpActivity.java
+ * Purpose: Register a user
+ */
+
 package com.gppmds.tra.temremdioa.controller;
 
 import android.os.Bundle;

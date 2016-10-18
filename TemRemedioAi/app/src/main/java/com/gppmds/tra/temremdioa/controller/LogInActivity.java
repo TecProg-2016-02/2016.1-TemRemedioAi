@@ -1,3 +1,8 @@
+/*
+ * File: LogInActivity.java
+ * Purpose: Log the user in the app (Facebook and Email)
+ */
+
 package com.gppmds.tra.temremdioa.controller;
 
 import android.animation.Animator;
@@ -42,6 +47,28 @@ import com.tra.gppmds.temremdioa.R;
 public class LogInActivity extends AppCompatActivity implements LoaderCallbacks<Cursor> {
 
     CallbackManager callbackManager;
+
+    // res references
+    private TextView info;
+
+    private EditText editTextUsernameView;
+
+    private EditText editTextPasswordView;
+
+    private ProgressBar progressiveBarProgressView;
+
+    private View viewLoginFormView;
+
+    private View focusView = null;
+
+    private Button mUsernameSignInButton;
+
+    private Button mRegisterButton;
+
+    private LoginButton mFacebookButton;
+
+    //Keep track of the login task to ensure we can cancel it if requested.
+    private UserLoginTask mAuthTask = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -179,27 +206,6 @@ public class LogInActivity extends AppCompatActivity implements LoaderCallbacks<
         finish();
     }
 
-    // res references
-    private TextView info;
-
-    private EditText editTextUsernameView;
-
-    private EditText editTextPasswordView;
-
-    private ProgressBar progressiveBarProgressView;
-
-    private View viewLoginFormView;
-
-    private View focusView = null;
-
-    private Button mUsernameSignInButton;
-
-    private Button mRegisterButton;
-
-    private LoginButton mFacebookButton;
-
-    //Keep track of the login task to ensure we can cancel it if requested.
-    private UserLoginTask mAuthTask = null;
 
     private void setListener() {
 
@@ -301,7 +307,7 @@ public class LogInActivity extends AppCompatActivity implements LoaderCallbacks<
             int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
 
             viewLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
-                
+
 
             viewLoginFormView.animate().setDuration(shortAnimTime).alpha(
                     show ? 0 : 1).setListener(new AnimatorListenerAdapter() {
