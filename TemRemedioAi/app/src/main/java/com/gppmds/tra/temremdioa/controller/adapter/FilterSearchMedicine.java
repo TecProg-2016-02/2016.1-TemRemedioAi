@@ -1,3 +1,8 @@
+/*
+ * File: CardListAdapterUBS.java
+ * Purpose: Filters teh results of the search for the available Medicines.
+ */
+
 package com.gppmds.tra.temremdioa.controller.adapter;
 
 import android.widget.Filter;

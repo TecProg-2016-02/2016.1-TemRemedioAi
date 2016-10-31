@@ -1,6 +1,6 @@
 /*
  * File: CardListAdapterUBS.java
- * Purpose:
+ * Purpose: Shows the list of UBSs available
  */
 
 package com.gppmds.tra.temremdioa.controller.adapter;
