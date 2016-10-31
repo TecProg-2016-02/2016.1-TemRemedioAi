@@ -25,6 +25,10 @@ public class Inform extends AppCompatActivity {
     Button informButton;
     Button cancelButton;
     DatePicker datePickerInform;
+    private Boolean availability;
+    private String ubsName;
+    private String medicineName;
+    private String medicineDos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,26 +36,34 @@ public class Inform extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.inform);
 
-        cancelButton= (Button) findViewById(R.id.cancel_button);
+        cancelButton = (Button) findViewById(R.id.cancel_button);
         cancelButton.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
                 finish();
             }
+
         });
 
         informButton = (Button) findViewById(R.id.inform_button);
         informButton.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
+
                 if (validateInform()) {
                     attemptInform();
-                    Toast.makeText(view.getContext(), "Informação enviada com sucesso.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(view.getContext(), "Informação enviada com sucesso.",
+                                                                    Toast.LENGTH_LONG).show();
                     finish();
                 } else {
-                    Toast.makeText(view.getContext(), "Não foi possível completar a ação.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(view.getContext(), "Não foi possível completar a ação.",
+                                                                    Toast.LENGTH_LONG).show();
                 }
+
             }
+
         });
 
         ubsName = getIntent().getStringExtra("UBSName");
@@ -67,16 +79,23 @@ public class Inform extends AppCompatActivity {
         radioButtonNotAvailable = (RadioButton) findViewById(R.id.not_available);
 
         datePickerInform = (DatePicker) findViewById(R.id.date_picker_inform);
+
     }
 
     private void attemptInform() {
 
         if (radioButtonAvailable.isChecked()) {
+
             availability = true;
+
         } else if (radioButtonNotAvailable.isChecked()) {
+
             availability = false;
+
         } else {
+
             availability = false;
+
         }
 
         Integer selectedYear = datePickerInform.getYear();
@@ -97,25 +116,22 @@ public class Inform extends AppCompatActivity {
         notification.setUserInform(getCurrentUser.getUsername());
         notification.pinInBackground();
         notification.saveInBackground();
+
     }
 
     private boolean validateInform() {
 
         boolean returnValidate = true;
         if (!radioButtonAvailable.isChecked() && !radioButtonNotAvailable.isChecked()) {
+
             radioButtonAvailable.setError("Disponibilidade não selecionada");
             returnValidate = false;
+
         }
         // Validate data;
 
         return returnValidate;
+
     }
 
-    private Boolean availability;
-
-    private String ubsName;
-
-    private String medicineName;
-
-    private String medicineDos;
 }

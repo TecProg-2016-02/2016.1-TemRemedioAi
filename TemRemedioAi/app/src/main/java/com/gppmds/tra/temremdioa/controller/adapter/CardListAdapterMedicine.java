@@ -20,29 +20,37 @@ import com.tra.gppmds.temremdioa.R;
 
 import java.util.List;
 
-public class CardListAdapterMedicine extends RecyclerView.Adapter<ViewHolderMedicine> implements Filterable{
+public class CardListAdapterMedicine extends RecyclerView.Adapter<ViewHolderMedicine> implements Filterable {
 
     public static List<Medicine> dataMedicine;
     List<Medicine> filterDataMedicine;
     Context contextOpen;
-    FilterSearchMedicine filter;
+    FilterSearchMedicine filterForMedicine;
+    private Boolean showButtonUBSs;
+    private Boolean showButtonInform;
+    private String ubsName;
 
     public CardListAdapterMedicine(Context context, List<Medicine> dataMedicine) {
 
         this.contextOpen = context;
         this.dataMedicine = dataMedicine;
         this.filterDataMedicine = dataMedicine;
+
         setShowButtonUBSs(true);
         setShowButtonInform(false);
         setUbsName("");
+
     }
 
     @Override
     public ViewHolderMedicine onCreateViewHolder(ViewGroup parent, int viewType) {
 
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        CardView view = (CardView) inflater.inflate(R.layout.card_list_medicine, parent, false);
+        CardView view = (CardView) inflater.inflate(R.layout.card_list_medicine,
+                                                                        parent, false);
+
         return new ViewHolderMedicine(view);
+
     }
 
     @Override
@@ -54,71 +62,93 @@ public class CardListAdapterMedicine extends RecyclerView.Adapter<ViewHolderMedi
         holder.getTextViewMedicineDosage().setText(rowData.getMedicineDosage());
 
         if (!getShowButtonUBSs()) {
+
             holder.getButtonSelectUbs().setVisibility(View.GONE);
-            RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) holder.getButtonMedicineInform().getLayoutParams();
+            RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams)
+                                            holder.getButtonMedicineInform().getLayoutParams();
             params.addRule(RelativeLayout.ALIGN_PARENT_END);
             holder.getButtonMedicineInform().setLayoutParams(params);
+
         } else {
             // Nothing to do
         }
 
         if (!getUbsName().equalsIgnoreCase("")) {
+
             holder.ubsSelectedName = getUbsName();
+
         } else {
+
             holder.ubsSelectedName = "";
+
         }
 
         if (!getShowButtonInform()) {
+
             holder.buttonMedicineInform.setVisibility(View.GONE);
+
         }
+
     }
 
     @Override
     public FilterSearchMedicine getFilter() {
 
-        if(filter == null) {
-            filter = new FilterSearchMedicine(filterDataMedicine, this );
+        if(filterForMedicine == null) {
+
+            filterForMedicine = new FilterSearchMedicine(filterDataMedicine, this );
+
         } else {
+
             // Nothing to do
+
         }
 
-        return filter;
+        return filterForMedicine;
+
     }
 
     @Override
     public int getItemCount() {
 
         return dataMedicine.size();
+
     }
 
     public void setShowButtonUBSs(Boolean showButtonUBSs) {
 
         this.showButtonUBSs = showButtonUBSs;
+
     }
 
     private Boolean getShowButtonUBSs() {
 
         return this.showButtonUBSs;
+
     }
 
     public void setShowButtonInform(Boolean showButtonInform) {
 
         this.showButtonInform = showButtonInform;
+
     }
 
     private Boolean getShowButtonInform() {
 
         return this.showButtonInform;
+
     }
 
     public String getUbsName() {
 
         return this.ubsName;
+
     }
 
     public void setUbsName(String ubsName) {
 
         this.ubsName = ubsName;
+
     }
 
     private void showInformButtonIfThereIsACurrentUser() {
@@ -133,13 +163,9 @@ public class CardListAdapterMedicine extends RecyclerView.Adapter<ViewHolderMedi
 
     public void createFilter() {
 
-        filter = new FilterSearchMedicine(filterDataMedicine, this);
+        filterForMedicine = new FilterSearchMedicine(filterDataMedicine, this);
          Boolean test = getShowButtonUBSs();
+
     }
 
-    private Boolean showButtonUBSs;
-
-    private Boolean showButtonInform;
-
-    private String ubsName;
 }
