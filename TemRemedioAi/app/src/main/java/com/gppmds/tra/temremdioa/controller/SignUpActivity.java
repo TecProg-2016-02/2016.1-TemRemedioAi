@@ -24,14 +24,14 @@ public class SignUpActivity extends AppCompatActivity {
 
     ParseUser user = new ParseUser();
 
-    public boolean getSpecialCharacter(String word) {
+    private boolean getSpecialCharacter(String word) {
 
         Pattern regex = Pattern.compile("[^A-Za-z0-9]");
         Matcher matcher = regex.matcher(word);
         return matcher.find();
     }
 
-    public boolean isContainValid(String email) {
+    private boolean isContainValid(String email) {
 
         return email.contains("@");
     }
