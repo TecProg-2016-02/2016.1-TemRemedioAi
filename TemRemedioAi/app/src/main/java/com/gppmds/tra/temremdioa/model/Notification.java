@@ -15,21 +15,21 @@ public class Notification extends ParseObject {
     public String getMedicineName(){
         return getString(getTitleMedicineName());
     }
-    public void setMedicineName(String medicine_name){
+    private void setMedicineName(String medicine_name){
         put(getTitleMedicineName(), medicine_name);
     }
 
     public String getMedicineDosage(){
         return getString(getTitleMedicineDosage());
     }
-    public void setMedicineDosage(String medicine_dosage){
+    private void setMedicineDosage(String medicine_dosage){
         put(getTitleMedicineDosage(), medicine_dosage);
     }
 
     public String getUBSName(){
         return getString(getTitleUBSName());
     }
-    public void setUBSName(String ubs_name){
+    private void setUBSName(String ubs_name){
         put(getTitleUBSName(), ubs_name);
     }
 
@@ -43,19 +43,42 @@ public class Notification extends ParseObject {
     public Boolean getAvailable(){
         return getBoolean(getTitleAvailable());
     }
-    public void setAvailable(Boolean available){
+    private void setAvailable(Boolean available){
         put(getTitleAvailable(), available);
     }
 
     public String getUserInform(){
         return getString(getTitleUser());
     }
-    public void setUserInform(String code){
+    private void setUserInform(String code){
         put(getTitleUser(), code);
     }
 
     public static ParseQuery<Notification> getQuery() {
         return ParseQuery.getQuery(Notification.class);
+    }
+
+    // Change way to use set methods
+    public void setAll(String choice, String medicine_name, String medicine_dosage,
+                       String ubs_name, Boolean available, String code) {
+        // make input validation
+        switch (choice) {
+            case "name":
+                setMedicineName(medicine_name);
+                break;
+            case "dosage":
+                setMedicineDosage(medicine_dosage);
+                break;
+            case "ubsName":
+                setUBSName(ubs_name);
+                break;
+            case "available":
+                setAvailable(available);
+                break;
+            case "inform":
+                setUserInform(code);
+                break;
+        }
     }
 
     public static String getTitleMedicineName(){
