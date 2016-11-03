@@ -120,7 +120,7 @@ public class LogInActivity extends AppCompatActivity implements LoaderCallbacks<
 
     }
 
-    public boolean validateError(String word, String phrase, EditText text) {
+    private boolean validateError(String word, String phrase, EditText text) {
 
         String phraseValited = TextUtils.isEmpty(word) ? phrase : null;
         text.setError(phraseValited);
@@ -130,7 +130,7 @@ public class LogInActivity extends AppCompatActivity implements LoaderCallbacks<
         return TextUtils.isEmpty(word);
     }
 
-    public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
+    private class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
 
         private final String mUsername;
         private final String mPassword;

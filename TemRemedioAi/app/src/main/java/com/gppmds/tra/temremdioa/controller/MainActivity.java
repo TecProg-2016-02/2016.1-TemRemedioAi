@@ -84,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public DialogInterface.OnClickListener logout() {
+    private DialogInterface.OnClickListener logout() {
 
         return new DialogInterface.OnClickListener() {
 
@@ -155,7 +155,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public GoogleApiClient createClient() {
+    private GoogleApiClient createClient() {
 
         return new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
 
