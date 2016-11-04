@@ -56,12 +56,12 @@ public class SelectMedicineActivity extends AppCompatActivity {
         }
     }
 
-    public LinearLayoutManager createNewLinearLayoutManager() {
+    private LinearLayoutManager createNewLinearLayoutManager() {
         LinearLayoutManager llm = new LinearLayoutManager(getApplicationContext());
         return llm;
     }
 
-    public void createRecyclerView(CardListAdapterMedicine cardListAdapterMedicine) throws Exception {
+    private void createRecyclerView(CardListAdapterMedicine cardListAdapterMedicine) throws Exception {
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.medicine_recycler_view);
         if (recyclerView != null) {
             recyclerView.setLayoutManager(createNewLinearLayoutManager());
@@ -113,7 +113,7 @@ public class SelectMedicineActivity extends AppCompatActivity {
         setFilterAttentionLevel(getUbsAttentionLevel());
     }
 
-    public void setFilterAttentionLevel(String ubsAttentionLevel) {
+    private void setFilterAttentionLevel(String ubsAttentionLevel) {
         String [] attentionLevelFilters = ubsAttentionLevel.split(",");
 
         filterAttentionLevel = new ArrayList<String>();
@@ -126,11 +126,11 @@ public class SelectMedicineActivity extends AppCompatActivity {
         return filterAttentionLevel;
     }
 
-    public void setUbsName(String ubsName) {
+    private void setUbsName(String ubsName) {
         this.ubsName = ubsName;
     }
 
-    public void setUbsAttentionLevel(String ubsAttentionLevel) {
+    private void setUbsAttentionLevel(String ubsAttentionLevel) {
         this.ubsAttentionLevel = ubsAttentionLevel;
     }
 
