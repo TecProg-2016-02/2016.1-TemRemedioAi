@@ -30,7 +30,7 @@ public class CardListAdapterMedicine extends RecyclerView.Adapter<ViewHolderMedi
     private Boolean showButtonInform;
     private String ubsName;
 
-    public CardListAdapterMedicine(Context context, List<Medicine> dataMedicine) {
+    private CardListAdapterMedicine(Context context, List<Medicine> dataMedicine) {
 
         this.contextOpen = context;
         this.dataMedicine = dataMedicine;
@@ -43,7 +43,7 @@ public class CardListAdapterMedicine extends RecyclerView.Adapter<ViewHolderMedi
     }
 
     @Override
-    public ViewHolderMedicine onCreateViewHolder(ViewGroup parent, int viewType) {
+    private ViewHolderMedicine onCreateViewHolder(ViewGroup parent, int viewType) {
 
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         CardView view = (CardView) inflater.inflate(R.layout.card_list_medicine,
@@ -54,7 +54,7 @@ public class CardListAdapterMedicine extends RecyclerView.Adapter<ViewHolderMedi
     }
 
     @Override
-    public void onBindViewHolder(ViewHolderMedicine holder, int position) {
+    private void onBindViewHolder(ViewHolderMedicine holder, int position) {
 
         Medicine rowData = this.dataMedicine.get(position);
         holder.getTextViewMedicineName().setText(rowData.getMedicineDescription());
@@ -109,7 +109,7 @@ public class CardListAdapterMedicine extends RecyclerView.Adapter<ViewHolderMedi
     }
 
     @Override
-    public int getItemCount() {
+    private int getItemCount() {
 
         return dataMedicine.size();
 
@@ -139,7 +139,7 @@ public class CardListAdapterMedicine extends RecyclerView.Adapter<ViewHolderMedi
 
     }
 
-    public String getUbsName() {
+    private String getUbsName() {
 
         return this.ubsName;
 
