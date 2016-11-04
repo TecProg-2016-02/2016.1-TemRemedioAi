@@ -28,7 +28,7 @@ public class CardListAdapterUBS extends RecyclerView.Adapter<ViewHolderUBS> impl
 
     FilterSearchUBS filter;
 
-    public CardListAdapterUBS(Context context, List<UBS> dataUBS) {
+    private CardListAdapterUBS(Context context, List<UBS> dataUBS) {
 
         this.contextOpen = context;
         this.dataUBS = dataUBS;
@@ -96,7 +96,7 @@ public class CardListAdapterUBS extends RecyclerView.Adapter<ViewHolderUBS> impl
         return dataUBS.size();
     }
 
-    public void setShowButtonMedicines(Boolean showButtonMedicines) {
+    private void setShowButtonMedicines(Boolean showButtonMedicines) {
 
         this.showButtonMedicines = showButtonMedicines;
     }
@@ -107,7 +107,7 @@ public class CardListAdapterUBS extends RecyclerView.Adapter<ViewHolderUBS> impl
         Boolean test = getShowButtonMedicines();
     }
 
-    public void setShowButtonInform(boolean showButtonInform) {
+    private void setShowButtonInform(boolean showButtonInform) {
 
         this.showButtonInform = showButtonInform;
     }
@@ -116,7 +116,7 @@ public class CardListAdapterUBS extends RecyclerView.Adapter<ViewHolderUBS> impl
         return this.showButtonInform;
     }
 
-    public void setMedicineName(String medicineName) {
+    private void setMedicineName(String medicineName) {
         this.medicineName = medicineName;
     }
 
@@ -125,7 +125,7 @@ public class CardListAdapterUBS extends RecyclerView.Adapter<ViewHolderUBS> impl
         return this.medicineName;
     }
 
-    public void setMedicineDos(String medicineDos) {
+    private void setMedicineDos(String medicineDos) {
 
         this.medicineDos= medicineDos;
     }
