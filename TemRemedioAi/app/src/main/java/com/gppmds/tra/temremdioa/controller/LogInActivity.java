@@ -271,6 +271,7 @@ public class LogInActivity extends AppCompatActivity implements LoaderCallbacks<
             return;
         }
 
+        // Check if fields are valid to continue login
         if ((validateError(username, "Ops! Campo de username esta vazio.", editTextUsernameView) ||
                 validateError(password, "Ops! Campo do password esta vazio.", editTextPasswordView))) {
 
@@ -281,7 +282,7 @@ public class LogInActivity extends AppCompatActivity implements LoaderCallbacks<
             ParseUser.logInInBackground(username, password, new LogInCallback() {
                 @Override
                 public void done(ParseUser parseUser, ParseException e) {
-
+                    // Check if the variable parseUser has received the token
                     if (parseUser != null) {
 
                         Toast.makeText(getApplicationContext(), "Logado com sucesso, seja bem vindo " + username +"!",
