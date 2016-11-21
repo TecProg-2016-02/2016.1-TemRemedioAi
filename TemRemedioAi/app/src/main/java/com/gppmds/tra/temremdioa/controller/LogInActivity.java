@@ -79,7 +79,9 @@ public class LogInActivity extends AppCompatActivity implements LoaderCallbacks<
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        // Saves all inputs datas
         setValues();
+        // Button actions
         setListener();
     }
 
@@ -272,6 +274,7 @@ public class LogInActivity extends AppCompatActivity implements LoaderCallbacks<
         if ((validateError(username, "Ops! Campo de username esta vazio.", editTextUsernameView) ||
                 validateError(password, "Ops! Campo do password esta vazio.", editTextPasswordView))) {
 
+            // Show login errors
             focusView.requestFocus();
         } else {
             showProgress(true);
