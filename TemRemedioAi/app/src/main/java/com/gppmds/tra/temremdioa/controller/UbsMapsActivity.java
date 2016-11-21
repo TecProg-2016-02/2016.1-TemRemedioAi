@@ -28,6 +28,7 @@ public class UbsMapsActivity extends AppCompatActivity implements OnMapReadyCall
     private String ubsName;
 
     private static final int LAT_LONG_ZOOM = 13;
+    private static final int NEUTRAL_PARAMETER = 0;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -53,8 +54,8 @@ public class UbsMapsActivity extends AppCompatActivity implements OnMapReadyCall
     };
 
     private void gettingLatitudeAndLongitude() {
-        latitude = getIntent().getDoubleExtra("latitude", 0);
-        longitude = getIntent().getDoubleExtra("longitude", 0);
+        latitude = getIntent().getDoubleExtra("latitude", NEUTRAL_PARAMETER);
+        longitude = getIntent().getDoubleExtra("longitude", NEUTRAL_PARAMETER);
     }
 
     private void gettingUbsFromHolder() {
@@ -133,7 +134,7 @@ public class UbsMapsActivity extends AppCompatActivity implements OnMapReadyCall
     public boolean isGoogleMapsInstalled() {
         try {
             ApplicationInfo info = getPackageManager()
-                    .getApplicationInfo("com.google.android.apps.maps", 0);
+                    .getApplicationInfo("com.google.android.apps.maps", NEUTRAL_PARAMETER);
             return true;
         } catch(PackageManager.NameNotFoundException e) {
             return false;

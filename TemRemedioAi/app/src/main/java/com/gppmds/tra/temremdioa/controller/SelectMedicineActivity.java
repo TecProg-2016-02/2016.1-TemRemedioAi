@@ -21,6 +21,7 @@ public class SelectMedicineActivity extends AppCompatActivity {
     private ArrayList<String> filterAttentionLevel; // Filters medicines by level of attention
     private String ubsName;
     private String ubsAttentionLevel; // To set attention level defined in the document
+    private static final int LIMIT_QUERY = 1000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,7 +75,7 @@ public class SelectMedicineActivity extends AppCompatActivity {
 
     public List<Medicine> getListOfMedicine(ArrayList<String> filterAttentionLevel) {
         ParseQuery<Medicine> queryMedicine = Medicine.getQuery();
-        queryMedicine.setLimit(1000);
+        queryMedicine.setLimit(LIMIT_QUERY);
         queryMedicine.whereContainedIn(Medicine.getMedicineAttentionLevelTitle(), filterAttentionLevel);
         queryMedicine.orderByAscending(Medicine.getMedicineDescriptionTitle());
         queryMedicine.fromLocalDatastore();

@@ -58,6 +58,10 @@ public class ViewHolderMedicine extends RecyclerView.ViewHolder {
 
 
     public ViewHolderMedicine(CardView card) {
+        final enum sequence{ 
+            ZERO, ONE, TWO, THREE;
+        }
+
         super(card);
         this.textViewMedicineName = (TextView) card.findViewById(R.id
                 .textViewMedicineName);
@@ -93,13 +97,13 @@ public class ViewHolderMedicine extends RecyclerView.ViewHolder {
                         expandLayout.getViewTreeObserver().removeOnPreDrawListener(this);
                         expandLayout.setVisibility(View.GONE);
 
-                        final int widthSpec = View.MeasureSpec.makeMeasureSpec(0, View
+                        final int widthSpec = View.MeasureSpec.makeMeasureSpec(sequence.ZERO.ordinal(), View
                                 .MeasureSpec.UNSPECIFIED);
-                        final int heightSpec = View.MeasureSpec.makeMeasureSpec(0, View
+                        final int heightSpec = View.MeasureSpec.makeMeasureSpec(sequence.ZERO.ordinal(), View
                                 .MeasureSpec.UNSPECIFIED);
                         expandLayout.measure(widthSpec, heightSpec);
 
-                        mAnimator = slideAnimator(0, expandLayout.getMeasuredHeight());
+                        mAnimator = slideAnimator(sequence.ZERO.ordinal(), expandLayout.getMeasuredHeight());
                         return true;
                     }
                 });
@@ -117,24 +121,24 @@ public class ViewHolderMedicine extends RecyclerView.ViewHolder {
                     notificationList = getNotifications(selectItem);
 
                     haveNotification = false;
-                    if (notificationList.size() >= 1) {
+                    if (notificationList.size() >= sequence.ONE.ordinal()) {
                         haveNotification = true;
                         getTextViewLastInformation1().setText("1. " +
-                                generateTextNotification(notificationList.get(0)));
+                                generateTextNotification(notificationList.get(sequence.ZERO.ordinal())));
                     } else {
                         getTextViewLastInformation1().setText("");
                     }
 
-                    if (notificationList.size() >= 2) {
+                    if (notificationList.size() >= sequence.TWO.ordinal()) {
                         getTextViewLastInformation2().setText("2. " +
-                                generateTextNotification(notificationList.get(1)));
+                                generateTextNotification(notificationList.get(sequence.ONE.ordinal())));
                     } else {
                         getTextViewLastInformation2().setText("");
                     }
 
-                    if (notificationList.size() >= 3) {
+                    if (notificationList.size() >= sequence.THREE.ordinal()) {
                         getTextViewLastInformation3().setText("3. " +
-                                generateTextNotification(notificationList.get(2)));
+                                generateTextNotification(notificationList.get(sequence.TWO.ordinal())));
                     } else {
                         getTextViewLastInformation3().setText("");
                     }
