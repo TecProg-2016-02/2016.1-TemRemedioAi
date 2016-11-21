@@ -55,13 +55,14 @@ public class ParseInitializer extends android.app.Application {
 
     public boolean loadLocalDateBaseMedicine() {
         ParseQuery<Medicine> queryMedicine = Medicine.getQuery();
-        queryMedicine.setLimit(1000);
+        queryMedicine.setLimit(1000); // Set limit of medicines to show on screen
         queryMedicine.findInBackground(new FindCallback<Medicine>() {
             @Override
             public void done(List<Medicine> list, ParseException e) {
                 if (e != null) {
                     // Nothing to do
                 } else {
+                    // To save queried Medicines to local database
                     Medicine.pinAllInBackground(list);
                 }
             }
@@ -71,13 +72,14 @@ public class ParseInitializer extends android.app.Application {
 
     public boolean loadLocalDateBaseUBS() {
         ParseQuery<UBS> queryUBS = UBS.getQuery();
-        queryUBS.setLimit(120);
+        queryUBS.setLimit(120); // Set limit of UBS to show on screen
         queryUBS.findInBackground(new FindCallback<UBS>() {
             @Override
             public void done(List<UBS> list, ParseException e) {
                 if (e != null) {
                     // Nothing to do
                 } else {
+                    // To save queried UBS to local database
                     UBS.pinAllInBackground(list);
                 }
             }
@@ -87,13 +89,14 @@ public class ParseInitializer extends android.app.Application {
 
     public boolean loadLocalDateBaseNotification() {
         ParseQuery<Notification> queryNotification = Notification.getQuery();
-        queryNotification.setLimit(1000);
+        queryNotification.setLimit(1000); // Set limit of notifications to show on screen
         queryNotification.findInBackground(new FindCallback<Notification>() {
             @Override
             public void done(List<Notification> list, ParseException e) {
                 if (e != null) {
                     // Nothing to do
                 } else {
+                    // To save queried notification to local database
                     Notification.pinAllInBackground(list);
                 }
             }
