@@ -114,17 +114,17 @@ public class SignUpActivity extends AppCompatActivity {
 
         if (TextUtils.isEmpty(password)) {
             editTextPassword.setError(getString(R.string.error_field_required));
-            focusView = editTextPassword;
+            focusView = editTextPassword; // Saves password error in variable focusView
             passwordValid = false;
         }
         else if (password.length() < minimumSize){
             editTextPassword.setError(getString(R.string.error_invalid_password));
-            focusView = editTextPassword;
+            focusView = editTextPassword; // Saves password error in variable focusView
             passwordValid = false;
         }
         else if (!password.equals(passwordConfirmation)) {
             editTextPasswordConfirmation.setError(getString(R.string.error_different_password));
-            focusView = editTextPasswordConfirmation;
+            focusView = editTextPasswordConfirmation; // Saves password error in variable focusView
             passwordValid = false;
         } else {
             // Nothing to do
@@ -138,11 +138,11 @@ public class SignUpActivity extends AppCompatActivity {
 
         if (TextUtils.isEmpty(email)) {
             editTextEmail.setError(getString(R.string.error_field_required));
-            focusView = editTextEmail;
+            focusView = editTextEmail; // Saves email error in variable focusView
             emailValid = false;
         } else if (!isContainValid(email)) {
             editTextEmail.setError(getString(R.string.error_invalid_email));
-            focusView = editTextEmail;
+            focusView = editTextEmail; // Saves email error in variable focusView
             emailValid = false;
         } else {
             // Nothing to do
@@ -156,11 +156,11 @@ public class SignUpActivity extends AppCompatActivity {
 
         if (TextUtils.isEmpty(name)) {
             editTextName.setError(getString(R.string.error_field_required));
-            focusView = editTextName;
+            focusView = editTextName; // Saves name error in variable focusView
             nameValid = false;
         } else if (getSpecialCharacter(name)) {
             editTextName.setError(getString(R.string.error_character));
-            focusView = editTextName;
+            focusView = editTextName; // Saves name error in variable focusView
             nameValid = false;
         } else {
             // Nothing to do
@@ -176,7 +176,7 @@ public class SignUpActivity extends AppCompatActivity {
 
         age = Integer.parseInt(editTextAge.getText().toString());
         if (TextUtils.isEmpty(editTextAge.getText().toString()) || age < minimumAge || age > maximumAge) {
-            focusView = editTextAge;
+            focusView = editTextAge; // Saves age error in variable focusView
             ageValid = false;
             if (age < minimumAge || age > maximumAge) {
                 editTextAge.setError(getString(R.string.error_invalid_age));
@@ -195,7 +195,7 @@ public class SignUpActivity extends AppCompatActivity {
 
         if (!radioButtonGenderMale.isChecked() && !radioButtonGenderFem.isChecked()) {
             textViewGender.setError(getString(R.string.error_invalid_genre));
-            focusView = textViewGender;
+            focusView = textViewGender; // Saves gender error in variable focusView
             genderValid = false;
         } else {
             // Nothing to do
@@ -209,7 +209,7 @@ public class SignUpActivity extends AppCompatActivity {
 
         if (TextUtils.isEmpty(username)) {
             editTextUsername.setError(getString(R.string.error_field_required));
-            focusView = editTextUsername;
+            focusView = editTextUsername; // Saves focusView error in variable focusView
             usernameValid = false;
         } else {
             // Nothing to do
