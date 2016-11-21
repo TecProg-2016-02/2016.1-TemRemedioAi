@@ -56,12 +56,25 @@ public class ViewHolderMedicine extends RecyclerView.ViewHolder {
     public Boolean haveNotification;
     private PieChart pieChart;
 
+    private enum ran {
+        FORTY(40), ONE_HUNDRED(100), TWELVE(12);
 
-    public ViewHolderMedicine(CardView card) {
-        final enum sequence{ 
-            ZERO, ONE, TWO, THREE;
+        private int num;
+
+        test(int num){
+            this.num = num;
         }
 
+        public int getNum(){
+            return num;
+        }
+    }
+
+    private final enum sequence{ 
+        ZERO, ONE, TWO, THREE;
+    }
+
+    public ViewHolderMedicine(CardView card) {
         super(card);
         this.textViewMedicineName = (TextView) card.findViewById(R.id
                 .textViewMedicineName);
@@ -226,7 +239,7 @@ public class ViewHolderMedicine extends RecyclerView.ViewHolder {
                     ubsSelectedName);
         }
         queryNotification.orderByDescending(Notification.getTitleDateInform());
-        queryNotification.setLimit(3);
+        queryNotification.setLimit(sequence.THREE.ordinal());
 
         try {
             listNotification = queryNotification.find();
@@ -240,16 +253,16 @@ public class ViewHolderMedicine extends RecyclerView.ViewHolder {
     private void setInformationOfChartWithoutNotification() {
         pieChart.setDescription("");
         pieChart.setDrawHoleEnabled(true);
-        pieChart.setHoleRadius(0);
-        pieChart.setTransparentCircleRadius(40);
+        pieChart.setHoleRadius(sequence.ZERO.ordinal());
+        pieChart.setTransparentCircleRadius(ran.getNum().FORTY);
         pieChart.setDrawSliceText(false);
-        pieChart.setRotationAngle(0);
+        pieChart.setRotationAngle(sequence.ZERO.ordinal());
         pieChart.setRotationEnabled(true);
-        pieChart.animateY(1000);
+        pieChart.animateY(ran.getNum().ONE_HUNDRED);
 
         pieChart.getLegend().setEnabled(true);
         pieChart.getLegend().setPosition(Legend.LegendPosition.BELOW_CHART_CENTER);
-        pieChart.getLegend().setTextSize(12);
+        pieChart.getLegend().setTextSize(ran.getNum().TWELVE);
 
         pieChart.setNoDataTextDescription("Sem notificações encontradas.");
 
@@ -258,7 +271,7 @@ public class ViewHolderMedicine extends RecyclerView.ViewHolder {
 
         valuesLegend.add("Sem Notificação");
 
-        valuesAvailable.add(new Entry((float) 1, 0));
+        valuesAvailable.add(new Entry((float) sequence.ONE.ordinal(), sequence.ZERO.ordinal()));
 
         PieDataSet pieDataSet = new PieDataSet(valuesAvailable, "");
         int color [] = {Color.parseColor("#F0F0F0")};
@@ -275,16 +288,16 @@ public class ViewHolderMedicine extends RecyclerView.ViewHolder {
     private void setInformationOfChart(Medicine medicine) {
         pieChart.setDescription("");
         pieChart.setDrawHoleEnabled(true);
-        pieChart.setHoleRadius(0);
-        pieChart.setTransparentCircleRadius(40);
+        pieChart.setHoleRadius(sequence.ZERO.ordinal());
+        pieChart.setTransparentCircleRadius(ran.getNum().FORTY);
         pieChart.setDrawSliceText(false);
-        pieChart.setRotationAngle(0);
+        pieChart.setRotationAngle(sequence.ZERO.ordinal());
         pieChart.setRotationEnabled(true);
-        pieChart.animateY(1000);
+        pieChart.animateY(ran.getNum().ONE_HUNDRED);
 
         pieChart.getLegend().setEnabled(true);
         pieChart.getLegend().setPosition(Legend.LegendPosition.BELOW_CHART_CENTER);
-        pieChart.getLegend().setTextSize(12);
+        pieChart.getLegend().setTextSize(ran.getNum().TWELVE);
 
         pieChart.setNoDataTextDescription("Sem notificações encontradas.");
         pieChart.setData(getDataPie(medicine));
@@ -344,8 +357,8 @@ public class ViewHolderMedicine extends RecyclerView.ViewHolder {
         valuesLegend.add("Sim");
         valuesLegend.add("Não");
 
-        valuesAvailable.add(new Entry((float) countNotificationAvailable, 0));
-        valuesAvailable.add(new Entry((float) countNotificationNotAvailable, 1));
+        valuesAvailable.add(new Entry((float) countNotificationAvailable, sequence.ZERO.ordinal()));
+        valuesAvailable.add(new Entry((float) countNotificationNotAvailable, sequence.ONE.ordinal()));
 
         PieDataSet pieDataSet = new PieDataSet(valuesAvailable, "");
         int color [] = {Color.parseColor("#00BEED"), Color.parseColor("#FFED4F")};
@@ -370,7 +383,7 @@ public class ViewHolderMedicine extends RecyclerView.ViewHolder {
     private void collapse() {
         int finalHeight = expandLayout.getHeight();
 
-        ValueAnimator mAnimator2 = slideAnimator(finalHeight, 0);
+        ValueAnimator mAnimator2 = slideAnimator(finalHeight, sequence.ONE.ordinal());
         mAnimator2.addListener(new Animator.AnimatorListener(){
             @Override
             public void onAnimationEnd(Animator animator) {
