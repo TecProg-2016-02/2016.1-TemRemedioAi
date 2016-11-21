@@ -43,6 +43,7 @@ public class CardListAdapterUBS extends RecyclerView.Adapter<ViewHolderUBS> impl
     @Override
     public FilterSearchUBS getFilter() {
 
+        // Check if exist a filterSearch for ubs created
         if(filter == null) {
             filter = new FilterSearchUBS(filterDataUBS, this);
         } else {
@@ -67,24 +68,28 @@ public class CardListAdapterUBS extends RecyclerView.Adapter<ViewHolderUBS> impl
         holder.getTextViewUbsName().setText(rowData.getUbsName());
         holder.getTextViewUbsNeighborhood().setText(rowData.getUbsNeighborhood());
 
+        // Check if the button Medicine is visible
         if (!getShowButtonMedicines()) {
             holder.getButtonSelectMedicine().setVisibility(View.GONE);
         } else {
             // Nothing to do
         }
 
+        // Check if the medicine name is empty
         if(!getMedicineName().isEmpty()){
             holder.medicineSelectedName = getMedicineName();
         } else {
             holder.medicineSelectedName = "";
         }
 
+        // Check if the medicine dosage is empty
         if(!getMedicineDos().isEmpty()){
             holder.medicineSelectedDos = getMedicineDos();
         } else {
             holder.medicineSelectedDos = "";
         }
 
+        // Check if the button inform is visible
         if(!getShowButtonInform()){
             holder.buttonUbsInform.setVisibility(View.GONE);
         }
