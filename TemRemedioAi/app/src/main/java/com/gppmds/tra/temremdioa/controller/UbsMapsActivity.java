@@ -23,8 +23,8 @@ import com.tra.gppmds.temremdioa.R;
 public class UbsMapsActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
-    private Double latitude;
-    private Double longitude;
+    private Double latitude; // Set UBS location
+    private Double longitude; // Set UBS location
     private String ubsName;
 
     private static final int LAT_LONG_ZOOM = 13;
