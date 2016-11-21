@@ -61,6 +61,7 @@ public class CardListAdapterMedicine extends RecyclerView.Adapter<ViewHolderMedi
         holder.getTextViewMedicineUnit().setText(rowData.getUnityMedicineFormatted());
         holder.getTextViewMedicineDosage().setText(rowData.getMedicineDosage());
 
+        // Check if the button UBS is visible
         if (!getShowButtonUBSs()) {
 
             holder.getButtonSelectUbs().setVisibility(View.GONE);
@@ -73,6 +74,7 @@ public class CardListAdapterMedicine extends RecyclerView.Adapter<ViewHolderMedi
             // Nothing to do
         }
 
+        // Check if the ubs name is empty
         if (!getUbsName().equalsIgnoreCase("")) {
 
             holder.ubsSelectedName = getUbsName();
@@ -82,7 +84,7 @@ public class CardListAdapterMedicine extends RecyclerView.Adapter<ViewHolderMedi
             holder.ubsSelectedName = "";
 
         }
-
+        // Check if the button inform is visible
         if (!getShowButtonInform()) {
 
             holder.buttonMedicineInform.setVisibility(View.GONE);
@@ -94,6 +96,7 @@ public class CardListAdapterMedicine extends RecyclerView.Adapter<ViewHolderMedi
     @Override
     public FilterSearchMedicine getFilter() {
 
+        // Check if exist a filter for medicines created
         if(filterForMedicine == null) {
 
             filterForMedicine = new FilterSearchMedicine(filterDataMedicine, this );
