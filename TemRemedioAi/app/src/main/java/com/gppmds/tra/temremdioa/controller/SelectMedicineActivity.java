@@ -18,9 +18,9 @@ import java.util.List;
 
 public class SelectMedicineActivity extends AppCompatActivity {
 
-    private ArrayList<String> filterAttentionLevel;
+    private ArrayList<String> filterAttentionLevel; // Filters medicines by level of attention
     private String ubsName;
-    private String ubsAttentionLevel;
+    private String ubsAttentionLevel; // To set attention level defined in the document
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
