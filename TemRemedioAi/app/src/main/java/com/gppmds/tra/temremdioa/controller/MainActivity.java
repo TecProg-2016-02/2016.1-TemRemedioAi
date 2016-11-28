@@ -30,6 +30,11 @@ public class MainActivity extends AppCompatActivity {
 
     public SearchView searchView;
 
+    /*
+    * Initialization of all views and adapters placed within the function
+    * @param Bundle savedInstanceState - save the state of the app in bundle
+    * @return void
+    */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -84,6 +89,11 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    /*
+    * If user click action falls on this action, disconnects from the account.
+    * @param none
+    * @return dialog with the interface showing message
+    */
     private DialogInterface.OnClickListener logout() {
 
         return new DialogInterface.OnClickListener() {
@@ -101,6 +111,11 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    /*
+    * Click actions for the top bar menu
+    * @param MenuItem item - menu options
+    * @return return a boolean of selected option
+    */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
