@@ -33,6 +33,11 @@ public class SplashScreenActivity extends Activity {
         }, WAIT_TIME);
     }
 
+    /*
+    * Transition from splash screen to main screen
+    * @param none
+    * @return boolean - if found intent return true else return false
+    */
     public boolean openMainActivity() {
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         try {

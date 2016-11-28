@@ -49,6 +49,11 @@ public class MedicineFragment extends Fragment {
         return rootView;
     }
 
+    /*
+    * Get list of medicines from database
+    * @params none
+    * @return List of medicines found
+    */
     public List<Medicine> getListOfMedicines() {
 
         final int limitMedicines = 1000;
@@ -68,6 +73,11 @@ public class MedicineFragment extends Fragment {
         return medicines;
     }
 
+    /*
+    * Instance a fragment of the activity medicine for manipulation
+    * @params none
+    * @return an instantiated object
+    */
     public static MedicineFragment newInstance() {
 
         return new MedicineFragment();
