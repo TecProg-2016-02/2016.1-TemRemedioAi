@@ -24,41 +24,36 @@ public class SignUpActivity extends AppCompatActivity {
 
     ParseUser user = new ParseUser();
 
+    private EditText editTextEmail;
+    private EditText editTextPassword;
+    private EditText editTextPasswordConfirmation;
+    private EditText editTextAge;
+    private EditText editTextName;
+    private EditText editTextUsername;
+
+    private RadioButton radioButtonGenderMale;
+    private RadioButton radioButtonGenderFem;
+
+    private TextView textViewGender;
+
+    private Button buttonRegister;
+    private Button buttonCancel;
+
+    private View focusView = null;
+
     private boolean getSpecialCharacter(String word) {
 
+        // checks for characters other than those found as parameters in compile
+        // then compare with variable word 
         Pattern regex = Pattern.compile("[^A-Za-z0-9]");
         Matcher matcher = regex.matcher(word);
         return matcher.find();
     }
 
     private boolean isContainValid(String email) {
-
+        // checks if variable email contains "@"
         return email.contains("@");
     }
-
-    private EditText editTextEmail;
-
-    private EditText editTextPassword;
-
-    private EditText editTextPasswordConfirmation;
-
-    private EditText editTextAge;
-
-    private EditText editTextName;
-
-    private EditText editTextUsername;
-
-    private RadioButton radioButtonGenderMale;
-
-    private RadioButton radioButtonGenderFem;
-
-    private TextView textViewGender;
-
-    private Button buttonRegister;
-
-    private Button buttonCancel;
-
-    private View focusView = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +70,7 @@ public class SignUpActivity extends AppCompatActivity {
 
     private void setValues() {
 
+        // find all editTexts by id and set the return in variables
         editTextName = (EditText) findViewById(R.id.name);
         editTextEmail = (EditText) findViewById(R.id.email);
         editTextAge = (EditText) findViewById(R.id.ageText);

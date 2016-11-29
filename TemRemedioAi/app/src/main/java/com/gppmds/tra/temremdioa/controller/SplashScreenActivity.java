@@ -24,6 +24,8 @@ public class SplashScreenActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
 
+        // time of splash screen determined with the variable WAIT_TIME
+        // show splash screen with the support from a thread
         new Timer().schedule(new TimerTask() {
             @Override
             public void run() {
