@@ -108,16 +108,21 @@ public class SignUpActivity extends AppCompatActivity {
         boolean passwordValid = true;
         int minimumSize = 6;
 
+        // if = true, set error message and return to focusView in all cases
+
+        // verified if variablea password is empty
         if (TextUtils.isEmpty(password)) {
             editTextPassword.setError(getString(R.string.error_field_required));
             focusView = editTextPassword; // Saves password error in variable focusView
             passwordValid = false;
         }
+        // verified if variablea password is too short
         else if (password.length() < minimumSize){
             editTextPassword.setError(getString(R.string.error_invalid_password));
             focusView = editTextPassword; // Saves password error in variable focusView
             passwordValid = false;
         }
+        // verified if variablea password it's the same as passwordConfirmation
         else if (!password.equals(passwordConfirmation)) {
             editTextPasswordConfirmation.setError(getString(R.string.error_different_password));
             focusView = editTextPasswordConfirmation; // Saves password error in variable focusView
@@ -132,10 +137,14 @@ public class SignUpActivity extends AppCompatActivity {
     private boolean validateEmail(String email) {
         boolean emailValid = true;
 
+        // if = true, set error message and return to focusView in all cases
+
+        // verified if variablea email is empty
         if (TextUtils.isEmpty(email)) {
             editTextEmail.setError(getString(R.string.error_field_required));
             focusView = editTextEmail; // Saves email error in variable focusView
             emailValid = false;
+        // verified if variablea email contains a invalid character
         } else if (!isContainValid(email)) {
             editTextEmail.setError(getString(R.string.error_invalid_email));
             focusView = editTextEmail; // Saves email error in variable focusView
@@ -150,10 +159,14 @@ public class SignUpActivity extends AppCompatActivity {
     private boolean validateName(String name) {
         boolean nameValid = true;
 
+        // if = true, set error message and return to focusView in all cases
+
+        // verified if variablea name is empty
         if (TextUtils.isEmpty(name)) {
             editTextName.setError(getString(R.string.error_field_required));
             focusView = editTextName; // Saves name error in variable focusView
             nameValid = false;
+        // verified if variablea name contains a special character
         } else if (getSpecialCharacter(name)) {
             editTextName.setError(getString(R.string.error_character));
             focusView = editTextName; // Saves name error in variable focusView
@@ -171,6 +184,7 @@ public class SignUpActivity extends AppCompatActivity {
         int maximumAge = 100;
 
         age = Integer.parseInt(editTextAge.getText().toString());
+        // verified if variablea age is empty or if off limits
         if (TextUtils.isEmpty(editTextAge.getText().toString()) || age < minimumAge || age > maximumAge) {
             focusView = editTextAge; // Saves age error in variable focusView
             ageValid = false;
@@ -189,6 +203,7 @@ public class SignUpActivity extends AppCompatActivity {
     private boolean validateGender() {
         boolean genderValid = true;
 
+        // verified if the button was selected
         if (!radioButtonGenderMale.isChecked() && !radioButtonGenderFem.isChecked()) {
             textViewGender.setError(getString(R.string.error_invalid_genre));
             focusView = textViewGender; // Saves gender error in variable focusView
@@ -203,6 +218,7 @@ public class SignUpActivity extends AppCompatActivity {
     private boolean validateUsername(String username) {
         boolean usernameValid = true;
 
+        // verified if variablea username is empty
         if (TextUtils.isEmpty(username)) {
             editTextUsername.setError(getString(R.string.error_field_required));
             focusView = editTextUsername; // Saves focusView error in variable focusView
@@ -217,6 +233,7 @@ public class SignUpActivity extends AppCompatActivity {
     private String validateChoiceGender(){
         String gender = "";
 
+        // check which sex choice was made
         if (radioButtonGenderFem.isChecked()) {
             gender = "Feminino";
         } else if (radioButtonGenderMale.isChecked()) {
