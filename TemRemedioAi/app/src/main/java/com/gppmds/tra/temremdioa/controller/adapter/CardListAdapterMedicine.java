@@ -30,6 +30,50 @@ public class CardListAdapterMedicine extends RecyclerView.Adapter<ViewHolderMedi
     private Boolean showButtonInform;
     private String ubsName;
 
+     @Override
+    public FilterSearchMedicine getFilter() {
+
+        // Check if exist a filter for medicines created
+        if(filterForMedicine == null) {
+
+            filterForMedicine = new FilterSearchMedicine(filterDataMedicine, this );
+
+        } else {
+
+            // Nothing to do
+
+        }
+
+        return filterForMedicine;
+
+    }
+
+    public void setShowButtonUBSs(Boolean showButtonUBSs) {
+
+        this.showButtonUBSs = showButtonUBSs;
+
+    }
+
+
+    public void setShowButtonInform(Boolean showButtonInform) {
+
+        this.showButtonInform = showButtonInform;
+
+    }
+
+    public void setUbsName(String ubsName) {
+
+        this.ubsName = ubsName;
+
+    }
+
+    public void createFilter() {
+
+        filterForMedicine = new FilterSearchMedicine(filterDataMedicine, this);
+         Boolean test = getShowButtonUBSs();
+
+    }
+
     private CardListAdapterMedicine(Context context, List<Medicine> dataMedicine) {
 
         for(int i = 0; i < dataMedicine.length; i++) {
@@ -99,33 +143,9 @@ public class CardListAdapterMedicine extends RecyclerView.Adapter<ViewHolderMedi
     }
 
     @Override
-    public FilterSearchMedicine getFilter() {
-
-        // Check if exist a filter for medicines created
-        if(filterForMedicine == null) {
-
-            filterForMedicine = new FilterSearchMedicine(filterDataMedicine, this );
-
-        } else {
-
-            // Nothing to do
-
-        }
-
-        return filterForMedicine;
-
-    }
-
-    @Override
     private int getItemCount() {
 
         return dataMedicine.size();
-
-    }
-
-    public void setShowButtonUBSs(Boolean showButtonUBSs) {
-
-        this.showButtonUBSs = showButtonUBSs;
 
     }
 
@@ -134,13 +154,7 @@ public class CardListAdapterMedicine extends RecyclerView.Adapter<ViewHolderMedi
         return this.showButtonUBSs;
 
     }
-
-    public void setShowButtonInform(Boolean showButtonInform) {
-
-        this.showButtonInform = showButtonInform;
-
-    }
-
+    
     private Boolean getShowButtonInform() {
 
         return this.showButtonInform;
@@ -153,11 +167,6 @@ public class CardListAdapterMedicine extends RecyclerView.Adapter<ViewHolderMedi
 
     }
 
-    public void setUbsName(String ubsName) {
-
-        this.ubsName = ubsName;
-
-    }
 
     private void showInformButtonIfThereIsACurrentUser() {
 
@@ -168,12 +177,5 @@ public class CardListAdapterMedicine extends RecyclerView.Adapter<ViewHolderMedi
         }
         */
      }
-
-    public void createFilter() {
-
-        filterForMedicine = new FilterSearchMedicine(filterDataMedicine, this);
-         Boolean test = getShowButtonUBSs();
-
-    }
 
 }
