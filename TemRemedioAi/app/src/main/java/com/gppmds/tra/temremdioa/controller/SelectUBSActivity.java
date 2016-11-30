@@ -16,6 +16,8 @@ import com.tra.gppmds.temremdioa.R;
 import java.util.ArrayList;
 import java.util.List;
 
+import static junit.framework.Assert.*;
+
 public class SelectUBSActivity extends AppCompatActivity {
 
     private ArrayList<String> filterAttentionLevel; // Filters UBS by level of attention
@@ -78,9 +80,16 @@ public class SelectUBSActivity extends AppCompatActivity {
 
     public List<UBS> getListOfUbs(ArrayList<String> filterAttentionLevel) {
         /* Query ubs data from parse */
+
+        // Checking return values
+        assertTrue(UBS.getQuery() != null);
+        assertTrue(UBS.getUbsNameTitle() != null);
+        assertTrue(UBS.getUbsNameTitle() != null);
+
         ParseQuery<UBS> queryUBS = UBS.getQuery();
         queryUBS.whereContainedIn(UBS.getUbsAttentionLevelTitle(), filterAttentionLevel);
         queryUBS.orderByAscending(UBS.getUbsNameTitle());
+        assert queryUBS.fromLocalDatastore() != null;
         queryUBS.fromLocalDatastore();
 
         List<UBS> ubsList = null;

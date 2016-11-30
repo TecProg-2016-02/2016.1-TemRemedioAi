@@ -12,6 +12,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
 
+import static junit.framework.Assert.*;
+
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
@@ -54,6 +56,10 @@ public class UbsMapsActivity extends AppCompatActivity implements OnMapReadyCall
     };
 
     private void gettingLatitudeAndLongitude() {
+
+        assertTrue(getIntent().getDoubleExtra("latitude", NEUTRAL_PARAMETER) != null);
+        assertTrue(getIntent().getDoubleExtra("longitude", NEUTRAL_PARAMETER) != null);
+
         latitude = getIntent().getDoubleExtra("latitude", NEUTRAL_PARAMETER);
         longitude = getIntent().getDoubleExtra("longitude", NEUTRAL_PARAMETER);
     }
