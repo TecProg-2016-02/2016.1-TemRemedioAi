@@ -91,12 +91,17 @@ public class SignUpActivity extends AppCompatActivity {
         }
         // verified if variablea password it's the same as passwordConfirmation
         else if (!password.equals(passwordConfirmation)) {
+            
+            Log.e("SignUpActivity -> validatePassoword", 
+                  + password" != " + passwordConfirmation);
+
             editTextPasswordConfirmation.setError(getString(R.string.error_different_password));
             focusView = editTextPasswordConfirmation; // Saves password error in variable focusView
             passwordValid = false;
         } else {
             // Nothing to do
         }
+
 
         return passwordValid;
     }
@@ -120,6 +125,9 @@ public class SignUpActivity extends AppCompatActivity {
             // Nothing to do
         }
 
+        Log.i("SignUpActivity -> validateEmail", 
+              "Email = " + email);
+
         return emailValid;
     }
 
@@ -142,10 +150,13 @@ public class SignUpActivity extends AppCompatActivity {
             // Nothing to do
         }
 
+        Log.i("SignUpActivity -> validateName", 
+              "Name = " + name);
+
         return nameValid;
     }
 
-    private boolean validateAge(int age) {
+    private boolean validateAge(int age, EditText editTextAge) {
         boolean ageValid = true;
         int minimumAge = 0;
         int maximumAge = 100;
@@ -197,6 +208,9 @@ public class SignUpActivity extends AppCompatActivity {
             // Nothing to do
         }
 
+        Log.i("SignUpActivity -> validateUsername", 
+              "Username = " + username);
+        
         return usernameValid;
     }
 
