@@ -209,6 +209,103 @@ public class ViewHolderUBS extends RecyclerView.ViewHolder{
         });
     }
 
+    public TextView getTextViewUbsName(){
+        return this.textViewUbsName;
+    }
+    public TextView getTextViewUbsNeighborhood(){
+        return this.textViewUbsNeighborhood;
+    }
+    public TextView getTextViewWithoutNotification(){
+        return this.textViewWithoutNotification;
+    }
+    public TextView getTextViewLastInformationTitle() {
+        return this.textViewLastInformationTitle;
+    }
+    public TextView getTextViewLastInformation1() {
+        return this.textViewLastInformation1;
+    }
+    public TextView getTextViewLastInformation2() {
+        return this.textViewLastInformation2;
+    }
+    public TextView getTextViewLastInformation3() {
+        return this.textViewLastInformation3;
+    }
+
+    public Button getButtonSelectMedicine(){
+        return this.buttonSelectMedicine;
+    }
+    public Button getButtonUbsInform() {
+        return this.buttonUbsInform;
+    }
+
+    public PieData getDataPie(UBS ubs) {
+        PieData pieData = null;
+
+        Integer countNotificationAvailable = 0;
+        Integer countNotificationNotAvailable = 0;
+
+        ParseQuery<Notification> queryNotificationAvailable = Notification.getQuery();
+        queryNotificationAvailable.fromLocalDatastore();
+        queryNotificationAvailable.whereEqualTo(Notification.getTitleUBSName(),
+                                                                ubs.getUbsName());
+        queryNotificationAvailable.whereEqualTo(Notification.getTitleAvailable(), true);
+        if (medicineSelectedName != "") {
+            queryNotificationAvailable.whereEqualTo
+                    (Notification.getTitleMedicineDosage(), medicineSelectedDos);
+            queryNotificationAvailable.whereEqualTo
+                    (Notification.getTitleMedicineName(), medicineSelectedName);
+        } else {
+            // Nothing to do
+        }
+
+        try {
+            countNotificationAvailable = queryNotificationAvailable.count();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        ParseQuery<Notification> queryNotificationNotAvailable =
+                                                Notification.getQuery();
+        queryNotificationNotAvailable.fromLocalDatastore();
+        queryNotificationNotAvailable.whereEqualTo
+                (Notification.getTitleUBSName(), ubs.getUbsName());
+        queryNotificationNotAvailable.whereEqualTo
+                (Notification.getTitleAvailable(), false);
+        if (medicineSelectedName != "") {
+            queryNotificationNotAvailable.whereEqualTo
+                    (Notification.getTitleMedicineDosage(), medicineSelectedDos);
+            queryNotificationNotAvailable.whereEqualTo
+                    (Notification.getTitleMedicineName(), medicineSelectedName);
+        } else {
+            // Nothing to do
+        }
+
+        try {
+            countNotificationNotAvailable = queryNotificationNotAvailable.count();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        ArrayList<Entry> valuesAvailable = new ArrayList<Entry>();
+        ArrayList<String> valuesLegend = new ArrayList<String>();
+
+        valuesLegend.add("Sim");
+        valuesLegend.add("Não");
+
+        valuesAvailable.add(new Entry((float) countNotificationAvailable, 0));
+        valuesAvailable.add(new Entry((float) countNotificationNotAvailable, 1));
+
+        PieDataSet pieDataSet = new PieDataSet(valuesAvailable, "");
+        int color [] = {Color.parseColor("#00BEED"), Color.parseColor("#FFED4F")};
+        pieDataSet.setColors(color);
+        pieDataSet.setSliceSpace(5);
+        pieDataSet.setValueTextSize(10);
+
+        pieData = new PieData(valuesLegend, pieDataSet);
+
+        return pieData;
+    }
+
     private String generateTextNotification(Notification notification) {
         String textOfNotification = "";
         if (notification.getAvailable()) {
@@ -305,74 +402,6 @@ public class ViewHolderUBS extends RecyclerView.ViewHolder{
         pieChart.setData(getDataPie(ubs));
     }
 
-    public PieData getDataPie(UBS ubs) {
-        PieData pieData = null;
-
-        Integer countNotificationAvailable = 0;
-        Integer countNotificationNotAvailable = 0;
-
-        ParseQuery<Notification> queryNotificationAvailable = Notification.getQuery();
-        queryNotificationAvailable.fromLocalDatastore();
-        queryNotificationAvailable.whereEqualTo(Notification.getTitleUBSName(),
-                                                                ubs.getUbsName());
-        queryNotificationAvailable.whereEqualTo(Notification.getTitleAvailable(), true);
-        if (medicineSelectedName != "") {
-            queryNotificationAvailable.whereEqualTo
-                    (Notification.getTitleMedicineDosage(), medicineSelectedDos);
-            queryNotificationAvailable.whereEqualTo
-                    (Notification.getTitleMedicineName(), medicineSelectedName);
-        } else {
-            // Nothing to do
-        }
-
-        try {
-            countNotificationAvailable = queryNotificationAvailable.count();
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
-        ParseQuery<Notification> queryNotificationNotAvailable =
-                                                Notification.getQuery();
-        queryNotificationNotAvailable.fromLocalDatastore();
-        queryNotificationNotAvailable.whereEqualTo
-                (Notification.getTitleUBSName(), ubs.getUbsName());
-        queryNotificationNotAvailable.whereEqualTo
-                (Notification.getTitleAvailable(), false);
-        if (medicineSelectedName != "") {
-            queryNotificationNotAvailable.whereEqualTo
-                    (Notification.getTitleMedicineDosage(), medicineSelectedDos);
-            queryNotificationNotAvailable.whereEqualTo
-                    (Notification.getTitleMedicineName(), medicineSelectedName);
-        } else {
-            // Nothing to do
-        }
-
-        try {
-            countNotificationNotAvailable = queryNotificationNotAvailable.count();
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
-        ArrayList<Entry> valuesAvailable = new ArrayList<Entry>();
-        ArrayList<String> valuesLegend = new ArrayList<String>();
-
-        valuesLegend.add("Sim");
-        valuesLegend.add("Não");
-
-        valuesAvailable.add(new Entry((float) countNotificationAvailable, 0));
-        valuesAvailable.add(new Entry((float) countNotificationNotAvailable, 1));
-
-        PieDataSet pieDataSet = new PieDataSet(valuesAvailable, "");
-        int color [] = {Color.parseColor("#00BEED"), Color.parseColor("#FFED4F")};
-        pieDataSet.setColors(color);
-        pieDataSet.setSliceSpace(5);
-        pieDataSet.setValueTextSize(10);
-
-        pieData = new PieData(valuesLegend, pieDataSet);
-
-        return pieData;
-    }
-
     private void expand() {
         /* set Visible */
         Log.i("LOG", "Expand enter, View.VISIBLE");
@@ -426,34 +455,5 @@ public class ViewHolderUBS extends RecyclerView.ViewHolder{
             }
         });
         return animator;
-    }
-
-    public TextView getTextViewUbsName(){
-        return this.textViewUbsName;
-    }
-    public TextView getTextViewUbsNeighborhood(){
-        return this.textViewUbsNeighborhood;
-    }
-    public TextView getTextViewWithoutNotification(){
-        return this.textViewWithoutNotification;
-    }
-    public TextView getTextViewLastInformationTitle() {
-        return this.textViewLastInformationTitle;
-    }
-    public TextView getTextViewLastInformation1() {
-        return this.textViewLastInformation1;
-    }
-    public TextView getTextViewLastInformation2() {
-        return this.textViewLastInformation2;
-    }
-    public TextView getTextViewLastInformation3() {
-        return this.textViewLastInformation3;
-    }
-
-    public Button getButtonSelectMedicine(){
-        return this.buttonSelectMedicine;
-    }
-    public Button getButtonUbsInform() {
-        return this.buttonUbsInform;
     }
 }
