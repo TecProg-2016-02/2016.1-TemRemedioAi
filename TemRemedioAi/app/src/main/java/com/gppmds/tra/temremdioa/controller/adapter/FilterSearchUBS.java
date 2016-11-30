@@ -29,17 +29,25 @@ public class FilterSearchUBS extends Filter {
         if(constraint != null && constraint.length() > 0) {
             constraint = constraint.toString().toUpperCase();
             List<UBS> filteredUBSs = new ArrayList<>();
+            final int listSize = filteredUBSs.size();
 
-            for (int i = 0; i < filterList.size(); i++) {
-                if(filterList.get(i).getUbsName().toUpperCase().contains(constraint)) {
-                    filteredUBSs.add(filterList.get(i));
-                } else {
-                    /* Nothing to do */
+            if (listSize > -1 && listSize < filterList.size()+1 ) {
+                for (int i = 0; i < filterList.size(); i++) {
+                    if(filterList.get(i).getUbsName().toUpperCase().contains(constraint)) {
+                        filteredUBSs.add(filterList.get(i));
+                    } else {
+                        /* Nothing to do */
+                    }
                 }
+                results.count = filteredUBSs.size();
+                results.values = filteredUBSs;
+            } else {
+
+                Log.e("FilterSearchUBS -> filterResults",
+                      "invalid size");
+
             }
 
-            results.count = filteredUBSs.size();
-            results.values = filteredUBSs;
         } else {
             results.count = filterList.size();
             results.values = filterList;
