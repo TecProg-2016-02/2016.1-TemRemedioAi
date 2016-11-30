@@ -6,6 +6,7 @@
 package com.gppmds.tra.temremdioa.controller.adapter;
 
 import android.widget.Filter;
+import android.util.Log;
 
 import com.gppmds.tra.temremdioa.model.Medicine;
 

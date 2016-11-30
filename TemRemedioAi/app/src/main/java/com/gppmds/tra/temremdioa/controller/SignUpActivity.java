@@ -19,6 +19,7 @@ import android.widget.Toast;
 import com.parse.ParseUser;
 import com.parse.SignUpCallback;
 import com.tra.gppmds.temremdioa.R;
+import android.util.Log;
 
 public class SignUpActivity extends AppCompatActivity {
 

@@ -15,6 +15,7 @@ import android.widget.Filterable;
 import android.widget.RelativeLayout;
 
 import static junit.framework.Assert.*;
+import android.util.Log;
 
 import com.gppmds.tra.temremdioa.controller.adapter.holder.ViewHolderMedicine;
 import com.gppmds.tra.temremdioa.model.Medicine;

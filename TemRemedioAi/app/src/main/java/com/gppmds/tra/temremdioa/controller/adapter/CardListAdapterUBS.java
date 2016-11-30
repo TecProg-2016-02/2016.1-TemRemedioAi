@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.Filterable;
 
 import static junit.framework.Assert.*;
+import android.util.Log;
 
 import com.gppmds.tra.temremdioa.controller.adapter.holder.ViewHolderUBS;
 import com.gppmds.tra.temremdioa.model.UBS;
