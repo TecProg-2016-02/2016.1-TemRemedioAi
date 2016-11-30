@@ -42,10 +42,14 @@ public class FilterSearchUBS extends Filter {
                 results.count = filteredUBSs.size();
                 results.values = filteredUBSs;
             } else {
-
-                Log.e("FilterSearchUBS -> filterResults",
-                      "invalid size");
-
+                Exception eventException = new Exception("Invalid numbers to size.");
+                try {
+                    throw eventException;
+                } catch (Exception exception) {
+                    exception.notify();
+                    Log.e("FilterSearchUBS -> filterResults",
+                          "invalid size");
+                }
             }
 
         } else {
