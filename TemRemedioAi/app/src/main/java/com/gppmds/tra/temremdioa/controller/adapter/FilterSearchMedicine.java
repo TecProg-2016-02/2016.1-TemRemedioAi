@@ -36,17 +36,24 @@ public class FilterSearchMedicine extends Filter{
         if(constraint != null && constraint.length() > 0) {
             constraint = constraint.toString().toUpperCase();
             List<Medicine> filteredMedicines = new ArrayList<>();
+            final int listSize = filteredMedicines.size();
 
-            for (int i = 0; i < filterList.size(); i++) {
-                if(filterList.get(i).getMedicineDescription().toUpperCase().contains(constraint)) {
-                    filteredMedicines.add(filterList.get(i));
-                } else {
-                    /* Nothing to do */
+            if (listSize > -1 && listSize < filterList.size()+1 ) {
+                for (int i = 0; i < filterList.size(); i++) {
+                    if(filterList.get(i).getMedicineDescription().toUpperCase().contains(constraint)) {
+                        filteredMedicines.add(filterList.get(i));
+                    } else {
+                        /* Nothing to do */
+                    }
                 }
-            }
+                results.count = filteredMedicines.size();
+                results.values = filteredMedicines;
+            } else {
 
-            results.count = filteredMedicines.size();
-            results.values = filteredMedicines;
+                Log.e("FilterSearchMedicine -> filterResults",
+                      "invalid size");
+            
+            }
         } else {
             results.count = filterList.size();
             results.values = filterList;
