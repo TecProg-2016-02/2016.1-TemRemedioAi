@@ -32,6 +32,11 @@ public class CardListAdapterMedicine extends RecyclerView.Adapter<ViewHolderMedi
 
     private CardListAdapterMedicine(Context context, List<Medicine> dataMedicine) {
 
+        for(int i = 0; i < dataMedicine.length; i++) {
+            Log.d("CardListAdapterMedicine -> constructor",
+                  "DataMedicine["+ i +"] = " + dataMedicine[i]);
+        }
+
         this.contextOpen = context;
         this.dataMedicine = dataMedicine;
         this.filterDataMedicine = dataMedicine;

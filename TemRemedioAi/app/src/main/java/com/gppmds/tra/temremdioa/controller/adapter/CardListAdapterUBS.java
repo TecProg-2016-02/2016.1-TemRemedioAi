@@ -30,6 +30,11 @@ public class CardListAdapterUBS extends RecyclerView.Adapter<ViewHolderUBS> impl
 
     private CardListAdapterUBS(Context context, List<UBS> dataUBS) {
 
+        for(int i = 0; i < dataUBS.length; i++) {
+            Log.d("CardListAdapterUBS -> constructor",
+                  "DataUBS["+ i +"] = " + dataUBS[i]);
+        }
+
         this.contextOpen = context;
         this.dataUBS = dataUBS;
         this.filterDataUBS = dataUBS;

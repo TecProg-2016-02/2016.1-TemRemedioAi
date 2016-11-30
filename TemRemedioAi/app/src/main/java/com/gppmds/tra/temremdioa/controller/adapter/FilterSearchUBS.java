@@ -12,6 +12,12 @@ public class FilterSearchUBS extends Filter {
     List<UBS> filterList;
 
     public FilterSearchUBS(List<UBS> filterList, CardListAdapterUBS adapter) {
+
+        for(int i = 0; i < filterList.length; i++) {
+            Log.d("FilterSearchUBS -> constructor",
+                  "FilterList["+ i +"] = " + filterList[i]);
+        }
+
         this.adapter = adapter;
         this.filterList = filterList;
     }

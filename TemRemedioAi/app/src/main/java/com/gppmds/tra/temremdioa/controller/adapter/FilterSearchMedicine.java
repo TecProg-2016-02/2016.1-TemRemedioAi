@@ -18,6 +18,12 @@ public class FilterSearchMedicine extends Filter{
     List<Medicine> filterList;
 
     public FilterSearchMedicine(List<Medicine> filterList, CardListAdapterMedicine adapter) {
+
+        for(int i = 0; i < filterList.length; i++) {
+            Log.d("FilterSearchMedicine -> constructor",
+                  "FilterList["+ i +"] = " + filterList[i]);
+        }
+
         this.adapter = adapter;
         this.filterList = filterList;
     }
