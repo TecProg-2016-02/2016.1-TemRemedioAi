@@ -33,14 +33,20 @@ public class CardListAdapterUBS extends RecyclerView.Adapter<ViewHolderUBS> impl
 
     private CardListAdapterUBS(Context context, List<UBS> dataUBS) {
 
-        for(int i = 0; i < dataUBS.length; i++) {
-            Log.d("CardListAdapterUBS -> constructor",
-                  "DataUBS["+ i +"] = " + dataUBS[i]);
-        }
+        if (dataUBS.size() > -1 && dataUBS.size() < Integer.MAX_VALUE) {
+            for(int i = 0; i < dataUBS.length; i++) {
+                Log.d("CardListAdapterUBS -> constructor",
+                      "DataUBS["+ i +"] = " + dataUBS[i]);
+            }
+            this.contextOpen = context;
+            this.dataUBS = dataUBS;
+            this.filterDataUBS = dataUBS;
+        } else {
 
-        this.contextOpen = context;
-        this.dataUBS = dataUBS;
-        this.filterDataUBS = dataUBS;
+            Log.e("FilterSearchUBS -> filterResults",
+                      "invalid size");
+
+        }
 
         setShowButtonMedicines(true);
         setShowButtonInform(false);
