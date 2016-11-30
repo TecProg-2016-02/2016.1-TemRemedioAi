@@ -8,6 +8,8 @@ import com.parse.ParseClassName;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
+import static junit.framework.Assert.*;
+
 @ParseClassName("Medicamentos")
 public class Medicine extends ParseObject {
     /**
@@ -23,6 +25,8 @@ public class Medicine extends ParseObject {
      * @param sesCode
      */
     public void setMedicineSESCode(String sesCode){
+        assertTrue(sesCode.length() > 0);
+        assert sesCode != null;
         put(getMedicineSESCodeTitle(), sesCode);
     }
 
@@ -39,6 +43,8 @@ public class Medicine extends ParseObject {
      * @param medicineDescription
      */
     public void setMedicineDescription(String medicineDescription){
+        assertTrue(medicineDescription.length() > 0);
+        assert medicineDescription != null;
         put(getMedicineDescriptionTitle(), medicineDescription);
     }
 
@@ -55,6 +61,8 @@ public class Medicine extends ParseObject {
      * @param medicineDosage
      */
     public void setMedicineDosage(String medicineDosage){
+        assertTrue(medicineDosage.length() > 0);
+        assert medicineDosage != null;
         put(getMedicineDosageTitle(), medicineDosage);
     }
 
@@ -135,6 +143,8 @@ public class Medicine extends ParseObject {
      * @param medicineUnit
      */
     public void setMedicineUnit(String medicineUnit){
+        assertTrue(medicineUnit.length() > 0);
+        assert medicineUnit != null;
         put(getMedicineUnitTitle(), medicineUnit);
     }
 
@@ -181,6 +191,8 @@ public class Medicine extends ParseObject {
      * @param medicineAttentionLevel
      */
     public void setMedicineAttentionLevel(String medicineAttentionLevel){
+        assertTrue(medicineAttentionLevel.length() > 0);
+        assert medicineAttentionLevel != null;
         put(getMedicineAttentionLevelTitle(), medicineAttentionLevel);
     }
 
