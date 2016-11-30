@@ -49,23 +49,15 @@ public class LogInActivity extends AppCompatActivity implements LoaderCallbacks<
     CallbackManager callbackManager;
 
     // res references
-    private TextView info;
-
-    private EditText editTextUsernameView;
-
-    private EditText editTextPasswordView;
-
-    private ProgressBar progressiveBarProgressView;
-
-    private View viewLoginFormView;
-
+    private TextView info = (TextView)findViewById(R.id.info);
+    private EditText editTextUsernameView = (EditText) findViewById(R.id.log_in_username_field);
+    private EditText editTextPasswordView = (EditText) findViewById(R.id.log_in_password_field);
+    private Button mUsernameSignInButton = (Button) findViewById(R.id.log_in_button);
+    private Button mRegisterButton = (Button) findViewById(R.id.log_in_sign_in_button);
+    private LoginButton mFacebookButton = (LoginButton) findViewById(R.id.login_button_fb);
+    private ProgressBar progressiveBarProgressView = (ProgressBar) findViewById(R.id.log_in_progress_bar);
+    private View viewLoginFormView = (View) findViewById(R.id.log_in_form);
     private View focusView = null;
-
-    private Button mUsernameSignInButton;
-
-    private Button mRegisterButton;
-
-    private LoginButton mFacebookButton;
 
     //Keep track of the login task to ensure we can cancel it if requested.
     private UserLoginTask mAuthTask = null;
@@ -79,8 +71,6 @@ public class LogInActivity extends AppCompatActivity implements LoaderCallbacks<
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        // Saves all inputs datas
-        setValues();
         // Button actions
         setListener();
     }
@@ -104,22 +94,6 @@ public class LogInActivity extends AppCompatActivity implements LoaderCallbacks<
 
         callbackManager.onActivityResult(requestCode, resultCode, data);
         Log.e("data",data.toString());
-    }
-
-    public void setValues() {
-
-        editTextUsernameView = (EditText) findViewById(R.id.log_in_username_field);
-        editTextPasswordView = (EditText) findViewById(R.id.log_in_password_field);
-
-        mUsernameSignInButton = (Button) findViewById(R.id.log_in_button);
-        mRegisterButton = (Button) findViewById(R.id.log_in_sign_in_button);
-
-        info = (TextView)findViewById(R.id.info);
-        mFacebookButton = (LoginButton) findViewById(R.id.login_button_fb);
-
-        viewLoginFormView = (View) findViewById(R.id.log_in_form);
-        progressiveBarProgressView = (ProgressBar) findViewById(R.id.log_in_progress_bar);
-
     }
 
     private boolean validateError(String word, String phrase, EditText text) {
