@@ -49,10 +49,14 @@ public class FilterSearchMedicine extends Filter{
                 results.count = filteredMedicines.size();
                 results.values = filteredMedicines;
             } else {
-
-                Log.e("FilterSearchMedicine -> filterResults",
-                      "invalid size");
-            
+                Exception eventException = new Exception("Invalid numbers to size.");
+                try {
+                    throw eventException;
+                } catch (Exception exception) {
+                    exception.notify();
+                    Log.e("FilterSearchMedicine -> filterResults",
+                          "invalid size");
+                }            
             }
         } else {
             results.count = filterList.size();
