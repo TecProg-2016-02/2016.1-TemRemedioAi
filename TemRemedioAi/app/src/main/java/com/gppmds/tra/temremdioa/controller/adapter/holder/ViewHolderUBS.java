@@ -59,7 +59,9 @@ public class ViewHolderUBS extends RecyclerView.ViewHolder{
     public Boolean haveNotification;
 
     public ViewHolderUBS(CardView card) {
+
         super(card);
+        
         this.textViewUbsName = (TextView) card.findViewById(R.id.textViewUbsName);
         this.textViewUbsNeighborhood = (TextView) card.findViewById(R.id
                 .textViewUbsNeighborhood);
@@ -73,43 +75,51 @@ public class ViewHolderUBS extends RecyclerView.ViewHolder{
                 .textViewLastInformationTitle);
         this.textViewWithoutNotification = (TextView) card.findViewById(R.id
                 .textViewWithoutNotification);
+
         this.imageViewArrow = (ImageView) card.findViewById(R.id.imageViewArrow);
+
         this.buttonSelectMedicine = (Button) card.findViewById(R.id
                 .buttonSelectMedicine);
         this.buttonViewUbsDescription = (Button) card.findViewById(R.id
                 .buttonUbsDescription);
         this.buttonUbsInform = (Button) card.findViewById(R.id.buttonInformUbs);
-        this.expandLayout = (RelativeLayout) card.findViewById(R.id.expandable);
+
         this.headerLayout = (RelativeLayout) card.findViewById(R.id.header);
+
         this.pieChart = (PieChart) card.findViewById(R.id.pie_chart_ubs);
 
+        this.expandLayout = (RelativeLayout) card.findViewById(R.id.expandable);
         this.expandLayout.setVisibility(View.GONE);
-
         this.expandLayout.getViewTreeObserver().addOnPreDrawListener(
-                new ViewTreeObserver.OnPreDrawListener() {
+            new ViewTreeObserver.OnPreDrawListener() {
 
-                    @Override
-                    public boolean onPreDraw() {
-                        expandLayout.getViewTreeObserver()
-                                .removeOnPreDrawListener(this);
-                        expandLayout.setVisibility(View.GONE);
+                @Override
+                public boolean onPreDraw() {
 
-                        final int widthSpec = View.MeasureSpec.makeMeasureSpec(0,
-                                                View.MeasureSpec.UNSPECIFIED);
-                        final int heightSpec = View.MeasureSpec.makeMeasureSpec(0,
-                                                View.MeasureSpec.UNSPECIFIED);
-                        expandLayout.measure(widthSpec, heightSpec);
+                    final int widthSpec = View.MeasureSpec.makeMeasureSpec(0,
+                                            View.MeasureSpec.UNSPECIFIED);
+                    final int heightSpec = View.MeasureSpec.makeMeasureSpec(0,
+                                            View.MeasureSpec.UNSPECIFIED);
 
-                        mAnimator = slideAnimator(0, expandLayout.getMeasuredHeight());
-                        return true;
-                    }
-                });
+                    expandLayout.getViewTreeObserver()
+                            .removeOnPreDrawListener(this);
+                    expandLayout.setVisibility(View.GONE);
+                    expandLayout.measure(widthSpec, heightSpec);
+
+                    mAnimator = slideAnimator(0, expandLayout.getMeasuredHeight());
+
+                    return true;
+                }
+            });
 
         this.headerLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Log.i("LOG", "onClickListener of headerLayout clicked");
+
                 if (expandLayout.getVisibility() == View.GONE) {
+
                     Log.i("LOG", "Expand Click");
 
                     UBS selectItem = CardListAdapterUBS.dataUBS
@@ -156,9 +166,13 @@ public class ViewHolderUBS extends RecyclerView.ViewHolder{
                     } else {
                         getButtonUbsInform().setVisibility(View.GONE);
                     }
+
                     expand();
+
                 } else {
+                   
                     Log.i("LOG", "Collapse Click");
+                   
                     collapse();
                 }
             }
@@ -167,12 +181,15 @@ public class ViewHolderUBS extends RecyclerView.ViewHolder{
         this.buttonSelectMedicine.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(),
-                        SelectMedicineActivity.class);
+                
                 UBS selectItem = CardListAdapterUBS.dataUBS.get(ViewHolderUBS.this
                                                                 .getAdapterPosition());
+
+                Intent intent = new Intent(v.getContext(),
+                        SelectMedicineActivity.class);
                 intent.putExtra("nomeUBS", selectItem.getUbsName());
                 intent.putExtra("nivelAtencao", selectItem.getUbsAttentionLevel());
+                
                 v.getContext().startActivity(intent);
             }
         });
@@ -180,9 +197,11 @@ public class ViewHolderUBS extends RecyclerView.ViewHolder{
         this.buttonViewUbsDescription.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), UbsMapsActivity.class);
+                
                 UBS selectItem = CardListAdapterUBS.dataUBS.get(ViewHolderUBS.this
                                                                 .getAdapterPosition());
+                
+                Intent intent = new Intent(v.getContext(), UbsMapsActivity.class);
                 intent.putExtra("latitude", selectItem.getUbsLatitude());
                 intent.putExtra("longitude", selectItem.getUbsLongitude());
                 intent.putExtra("nomeUBS", selectItem.getUbsName());
@@ -190,6 +209,7 @@ public class ViewHolderUBS extends RecyclerView.ViewHolder{
                 intent.putExtra("descBairroUBS", selectItem.getUbsNeighborhood());
                 intent.putExtra("descCidadeUBS", selectItem.getUbsCity());
                 intent.putExtra("telefoneUBS", selectItem.getUbsPhone());
+                
                 v.getContext().startActivity(intent);
             }
         });
@@ -197,9 +217,11 @@ public class ViewHolderUBS extends RecyclerView.ViewHolder{
         this.buttonUbsInform.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), Inform.class);
+
                 UBS selectItem = CardListAdapterUBS.dataUBS.get(ViewHolderUBS.this
                                                                 .getAdapterPosition());
+
+                Intent intent = new Intent(view.getContext(), Inform.class);
                 intent.putExtra("UBSName", selectItem.getUbsName());
                 intent.putExtra("MedicineName", medicineSelectedName);
                 intent.putExtra("MedicineDos", medicineSelectedDos);
@@ -241,14 +263,13 @@ public class ViewHolderUBS extends RecyclerView.ViewHolder{
     public PieData getDataPie(UBS ubs) {
         PieData pieData = null;
 
-        Integer countNotificationAvailable = 0;
-        Integer countNotificationNotAvailable = 0;
 
         ParseQuery<Notification> queryNotificationAvailable = Notification.getQuery();
         queryNotificationAvailable.fromLocalDatastore();
         queryNotificationAvailable.whereEqualTo(Notification.getTitleUBSName(),
                                                                 ubs.getUbsName());
         queryNotificationAvailable.whereEqualTo(Notification.getTitleAvailable(), true);
+        
         if (medicineSelectedName != "") {
             queryNotificationAvailable.whereEqualTo
                     (Notification.getTitleMedicineDosage(), medicineSelectedDos);
@@ -258,6 +279,7 @@ public class ViewHolderUBS extends RecyclerView.ViewHolder{
             // Nothing to do
         }
 
+        Integer countNotificationAvailable = 0;
         try {
             countNotificationAvailable = queryNotificationAvailable.count();
         } catch (ParseException e) {
@@ -271,6 +293,7 @@ public class ViewHolderUBS extends RecyclerView.ViewHolder{
                 (Notification.getTitleUBSName(), ubs.getUbsName());
         queryNotificationNotAvailable.whereEqualTo
                 (Notification.getTitleAvailable(), false);
+        
         if (medicineSelectedName != "") {
             queryNotificationNotAvailable.whereEqualTo
                     (Notification.getTitleMedicineDosage(), medicineSelectedDos);
@@ -280,43 +303,48 @@ public class ViewHolderUBS extends RecyclerView.ViewHolder{
             // Nothing to do
         }
 
+        Integer countNotificationNotAvailable = 0;
         try {
             countNotificationNotAvailable = queryNotificationNotAvailable.count();
         } catch (ParseException e) {
             e.printStackTrace();
         }
 
-        ArrayList<Entry> valuesAvailable = new ArrayList<Entry>();
-        ArrayList<String> valuesLegend = new ArrayList<String>();
 
+        ArrayList<String> valuesLegend = new ArrayList<String>();
         valuesLegend.add("Sim");
         valuesLegend.add("Não");
 
+        ArrayList<Entry> valuesAvailable = new ArrayList<Entry>();
         valuesAvailable.add(new Entry((float) countNotificationAvailable, 0));
         valuesAvailable.add(new Entry((float) countNotificationNotAvailable, 1));
 
-        PieDataSet pieDataSet = new PieDataSet(valuesAvailable, "");
         int color [] = {Color.parseColor("#00BEED"), Color.parseColor("#FFED4F")};
+        
+        PieDataSet pieDataSet = new PieDataSet(valuesAvailable, "");
         pieDataSet.setColors(color);
         pieDataSet.setSliceSpace(5);
         pieDataSet.setValueTextSize(10);
-
         pieData = new PieData(valuesLegend, pieDataSet);
 
         return pieData;
     }
 
     private String generateTextNotification(Notification notification) {
+        
         String textOfNotification = "";
+        
         if (notification.getAvailable()) {
             textOfNotification = "Disponível em ";
         } else {
             textOfNotification = "Indisponível em ";
         }
-        Calendar dayCalendar = Calendar.getInstance(new Locale("pt", "BR"));
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd MMM yyyy");
+        
 
+        Calendar dayCalendar = Calendar.getInstance(new Locale("pt", "BR"));
         dayCalendar.setTime(notification.getDateInform());
+        
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd MMM yyyy");
         textOfNotification = textOfNotification + simpleDateFormat
                                                     .format(dayCalendar.getTime());
 
@@ -324,7 +352,6 @@ public class ViewHolderUBS extends RecyclerView.ViewHolder{
     }
 
     private List<Notification> getNotifications(UBS ubs) {
-        List<Notification> listNotification = null;
 
         ParseQuery<Notification> queryNotification = Notification.getQuery();
         queryNotification.whereEqualTo(Notification.getTitleUBSName(),
@@ -337,9 +364,11 @@ public class ViewHolderUBS extends RecyclerView.ViewHolder{
             queryNotification.whereEqualTo(Notification.getTitleMedicineName(),
                                                                 medicineSelectedName);
         }
+
         queryNotification.orderByDescending(Notification.getTitleDateInform());
         queryNotification.setLimit(3);
 
+        List<Notification> listNotification = null;
         try {
             listNotification = queryNotification.find();
         } catch (ParseException e) {
@@ -350,6 +379,7 @@ public class ViewHolderUBS extends RecyclerView.ViewHolder{
     }
 
     private void setInformationOfChartWithoutNotification() {
+        
         pieChart.setDescription("");
         pieChart.setDrawHoleEnabled(true);
         pieChart.setHoleRadius(0);
@@ -357,6 +387,7 @@ public class ViewHolderUBS extends RecyclerView.ViewHolder{
         pieChart.setDrawSliceText(false);
         pieChart.setRotationAngle(0);
         pieChart.setRotationEnabled(true);
+        
         pieChart.animateY(1000);
 
         pieChart.getLegend().setEnabled(true);
@@ -365,15 +396,15 @@ public class ViewHolderUBS extends RecyclerView.ViewHolder{
 
         pieChart.setNoDataTextDescription("Sem notificações encontradas.");
 
-        ArrayList<Entry> valuesAvailable = new ArrayList<Entry>();
         ArrayList<String> valuesLegend = new ArrayList<String>();
-
         valuesLegend.add("Sem Notificação");
 
+        ArrayList<Entry> valuesAvailable = new ArrayList<Entry>();
         valuesAvailable.add(new Entry((float) 1, 0));
 
-        PieDataSet pieDataSet = new PieDataSet(valuesAvailable, "");
         int color [] = {Color.parseColor("#F0F0F0")};
+
+        PieDataSet pieDataSet = new PieDataSet(valuesAvailable, "");
         pieDataSet.setColors(color);
         pieDataSet.setSliceSpace(5);
 
@@ -385,6 +416,7 @@ public class ViewHolderUBS extends RecyclerView.ViewHolder{
     }
 
     private void setInformationOfChart(UBS ubs) {
+
         pieChart.setDescription("");
         pieChart.setDrawHoleEnabled(true);
         pieChart.setHoleRadius(0);
@@ -392,6 +424,7 @@ public class ViewHolderUBS extends RecyclerView.ViewHolder{
         pieChart.setDrawSliceText(false);
         pieChart.setRotationAngle(0);
         pieChart.setRotationEnabled(true);
+
         pieChart.animateY(1000);
 
         pieChart.getLegend().setEnabled(true);
@@ -404,20 +437,27 @@ public class ViewHolderUBS extends RecyclerView.ViewHolder{
 
     private void expand() {
         /* set Visible */
+
         Log.i("LOG", "Expand enter, View.VISIBLE");
+
         expandLayout.setVisibility(View.VISIBLE);
+
         mAnimator.start();
+
         imageViewArrow.setBackgroundResource(R.drawable.ic_keyboard_arrow_up);
     }
 
     private void collapse() {
+        
         int finalHeight = expandLayout.getHeight();
 
         ValueAnimator mAnimator2 = slideAnimator(finalHeight, 0);
         mAnimator2.addListener(new Animator.AnimatorListener(){
             @Override
             public void onAnimationEnd(Animator animator) {
+        
                 Log.i("LOG", "collapse onAnimationEnd enter, View.GONE");
+        
                 expandLayout.setVisibility(View.GONE);
             }
 
@@ -436,13 +476,15 @@ public class ViewHolderUBS extends RecyclerView.ViewHolder{
                 // Nothing to do
             }
         });
+        
         mAnimator2.start();
+        
         imageViewArrow.setBackgroundResource(R.drawable.ic_keyboard_arrow_down);
     }
 
     private ValueAnimator slideAnimator(int start, int end) {
+        
         ValueAnimator animator = ValueAnimator.ofInt(start, end);
-
         animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator valueAnimator) {
