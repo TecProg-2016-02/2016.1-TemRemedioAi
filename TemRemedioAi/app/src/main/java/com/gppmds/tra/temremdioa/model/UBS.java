@@ -5,6 +5,8 @@ import com.parse.ParseClassName;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
+import static junit.framework.Assert.*;
+
 @ParseClassName("UBS")
 public class UBS extends ParseObject {
 
@@ -15,6 +17,7 @@ public class UBS extends ParseObject {
 
     //Sets a latitude to the establishment
     public void setUbsLatitude(Double ubsLatitude){
+        assert ubsLatitude != null;
         put(getUbsLatitudeTitle(), ubsLatitude);
     }
 
@@ -25,6 +28,7 @@ public class UBS extends ParseObject {
 
     //Sets the longitude to the establishment
     public void setUbsLongitude(Double ubsLongitude){
+        assert ubsLongitude != null;
         put(getUbsLongitudeTitle(), ubsLongitude);
     }
 
@@ -35,6 +39,9 @@ public class UBS extends ParseObject {
 
     //Sets a name to the establishment
     public void setUbsName(String ubsName){
+
+        assertTrue(ubsName.length() > 0);
+        assert ubsName != null;
         put(getUbsNameTitle(), ubsName);
     }
 
@@ -45,6 +52,9 @@ public class UBS extends ParseObject {
 
     //Sets an address to the establishment
     public void setUbsAddress(String ubsAddress){
+        
+        assertTrue(ubsAddress.length() > 0);
+        assert ubsAddress != null;
         put(getUbsAddressTitle(), ubsAddress);
     }
 
@@ -55,6 +65,9 @@ public class UBS extends ParseObject {
 
     //Sets a neighborhood to the establishment
     public void setUbsNeighborhood(String ubsNeighborhood){
+        
+        assertTrue(ubsNeighborhood.length() > 0);
+        assert ubsNeighborhood != null;
         put(getUbsNeighborhoodTitle(), ubsNeighborhood);
     }
 
@@ -65,6 +78,9 @@ public class UBS extends ParseObject {
 
     //Sets a city to the establishment
     public void setUbsCity(String ubsCity){
+
+        assertTrue(ubsCity.length() > 0);
+        assert ubsCity != null;
         put(getUbsCityTitle(), ubsCity);
     }
 
@@ -75,6 +91,9 @@ public class UBS extends ParseObject {
 
     //Sets an attention level to a
     public void setUbsAttentionLevel(String ubsAttentionLevel){
+        
+        assertTrue(ubsAttentionLevel.length() > 0);
+        assert ubsAttentionLevel != null;
         put(getUbsAttentionLevelTitle(), ubsAttentionLevel);
     }
 
@@ -85,6 +104,9 @@ public class UBS extends ParseObject {
 
     //Sets the phone of the establishment
     public void setUbsPhone(String ubsPhone){
+
+        assertTrue(ubsPhone.length() > 0);
+        assert ubsPhone != null;
         put(getUbsPhoneTitle(), ubsPhone);
     }
 
