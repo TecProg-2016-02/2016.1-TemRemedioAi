@@ -54,7 +54,7 @@ public class CardListAdapterMedicine extends RecyclerView.Adapter<ViewHolderMedi
     public void setShowButtonUBSs(Boolean showButtonUBSs) {
 
         assertFalse(showButtonUBSs == null);
-        this.showButtonUBSs = showButtonUBSs;
+        this.showButtonUBSs = (Boolean) showButtonUBSs;
 
     }
 
@@ -62,7 +62,7 @@ public class CardListAdapterMedicine extends RecyclerView.Adapter<ViewHolderMedi
     public void setShowButtonInform(Boolean showButtonInform) {
 
         assertFalse(showButtonInform == null);
-        this.showButtonInform = showButtonInform;
+        this.showButtonInform = (Boolean) showButtonInform;
 
     }
 
@@ -70,7 +70,7 @@ public class CardListAdapterMedicine extends RecyclerView.Adapter<ViewHolderMedi
 
         assertEquals("", ubsName);
         assert ubsName != null;
-        this.ubsName = ubsName;
+        this.ubsName = (String) ubsName;
 
     }
 
