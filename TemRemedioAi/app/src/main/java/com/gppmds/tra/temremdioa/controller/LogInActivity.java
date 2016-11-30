@@ -44,6 +44,8 @@ import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.tra.gppmds.temremdioa.R;
 
+import static junit.framework.Assert.*;
+
 public class LogInActivity extends AppCompatActivity implements LoaderCallbacks<Cursor> {
 
     CallbackManager callbackManager;
@@ -82,6 +84,7 @@ public class LogInActivity extends AppCompatActivity implements LoaderCallbacks<
 
     public ParseUser getCurrentUser() {
 
+        assert 
         ParseUser currentUser = ParseUser.getCurrentUser();
 
         return currentUser;
@@ -237,6 +240,10 @@ public class LogInActivity extends AppCompatActivity implements LoaderCallbacks<
     // Attempts to login in the system if the entries email and password are valid
     private void attemptLogin(){
 
+        // Checking return value
+        assertFalse(editTextUsernameView.getText().toString() == null);
+        assertFalse(editTextPasswordView.getText().toString() == null);
+
         // Store values at the time of the login attempt
         final String username = editTextUsernameView.getText().toString();
         String password = editTextPasswordView.getText().toString();
@@ -244,6 +251,12 @@ public class LogInActivity extends AppCompatActivity implements LoaderCallbacks<
         if (mAuthTask != null){
             return;
         }
+
+        // Checking return value
+        assert validateError(username, "Ops! Campo de username esta vazio.",
+                            editTextUsernameView) != null;
+        assert validateError(password, "Ops! Campo do password esta vazio.",
+                            editTextPasswordView) != null;
 
         // Check if fields are valid to continue login
         if ((validateError(username, "Ops! Campo de username esta vazio.", editTextUsernameView) ||
