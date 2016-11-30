@@ -23,13 +23,6 @@ import com.tra.gppmds.temremdioa.R;
 public class SignUpActivity extends AppCompatActivity {
 
     ParseUser user = new ParseUser();
-
-   
-    private RadioButton radioButtonGenderMale = (RadioButton) findViewById(R.id.mascButton);
-    private RadioButton radioButtonGenderFem = (RadioButton) findViewById(R.id.femButton);
-    private TextView textViewGender = (TextView) findViewById(R.id.textViewGender);
-    private Button buttonRegister = (Button) findViewById(R.id.register_button);
-    private Button buttonCancel = (Button) findViewById(R.id.register_cancel);
     private View focusView = null;
 
     private boolean getSpecialCharacter(String word) {
@@ -58,12 +51,15 @@ public class SignUpActivity extends AppCompatActivity {
 
     private void setListener() {
 
+        Button buttonRegister = (Button) findViewById(R.id.register_button);
         buttonRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 attemptRegister();
             }
         });
+
+        Button buttonCancel = (Button) findViewById(R.id.register_cancel);
         buttonCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -171,7 +167,10 @@ public class SignUpActivity extends AppCompatActivity {
         return ageValid;
     }
 
-    private boolean validateGender() {
+    private boolean validateGender(TextView textViewGender,  
+                                   RadioButton radioButtonGenderMale,
+                                   RadioButton radioButtonGenderFem) {
+        
         boolean genderValid = true;
 
         // verified if the button was selected
@@ -201,7 +200,8 @@ public class SignUpActivity extends AppCompatActivity {
         return usernameValid;
     }
 
-    private String validateChoiceGender(){
+    private String validateChoiceGender(RadioButton radioButtonGenderMale,
+                                        RadioButton radioButtonGenderFem){
         String gender = "";
 
         // check which sex choice was made
@@ -216,27 +216,14 @@ public class SignUpActivity extends AppCompatActivity {
         return gender;
     }
 
-    private void resetErrors(){
-        editTextEmail.setError(null);
-        editTextName.setError(null);
-        editTextPassword.setError(null);
-        editTextPasswordConfirmation.setError(null);
-        editTextAge.setError(null);
-        radioButtonGenderMale.setError(null);
-        radioButtonGenderFem.setError(null);
-        textViewGender.setError(null);
-        editTextUsername.setError(null);
-    }
-
     private void attemptRegister() {
-
-        resetErrors();
-
 
         // Store values at the time of the login attempt.
         // Checks inputs password
         EditText editTextPassword = (EditText) findViewById(R.id.password);
         EditText editTextPasswordConfirmation = (EditText) findViewById(R.id.password2);
+        editTextPassword.setError(null);
+        editTextPasswordConfirmation.setError(null);
         String password = editTextPassword.getText().toString();
         String passwordConfirmation = editTextPasswordConfirmation.getText().toString();
         boolean validPassoword = validatePassoword(password, passwordConfirmation, 
@@ -244,25 +231,36 @@ public class SignUpActivity extends AppCompatActivity {
 
         // Checks inputs email
         EditText editTextEmail = (EditText) findViewById(R.id.email);
+        editTextEmail.setError(null);
         String email = editTextEmail.getText().toString();
         boolean validEmail = validateEmail(email, editTextEmail);
 
         // Checks inputs name
         EditText editTextName = (EditText) findViewById(R.id.name);
+        editTextName.setError(null);
         String name = editTextName.getText().toString();
         boolean validName = validateName(name, editTextName);
 
         // Checks inputs age
         int age = 0;
         EditText editTextAge = (EditText) findViewById(R.id.ageText);
+        editTextAge.setError(null);
         boolean validAge = validateAge(age, editTextAge);
 
         // Check inputs gender
-        boolean validGender = validateGender();
-        String gender = validateChoiceGender();
+        RadioButton radioButtonGenderMale = (RadioButton) findViewById(R.id.mascButton);
+        RadioButton radioButtonGenderFem = (RadioButton) findViewById(R.id.femButton);
+        TextView textViewGender = (TextView) findViewById(R.id.textViewGender);
+        radioButtonGenderMale.setError(null);
+        radioButtonGenderFem.setError(null);
+        textViewGender.setError(null);
+        boolean validGender = validateGender(textViewGender, radioButtonGenderMale, 
+                                                             radioButtonGenderFem);
+        String gender = validateChoiceGender(radioButtonGenderMale, radioButtonGenderFem);
 
         // Checks inputs username
         EditText editTextUsername = (EditText) findViewById(R.id.username);
+        editTextUsername.setError(null);
         String username = editTextUsername.getText().toString();
         boolean validUsername = validateUsername(username, editTextUsername);
 
