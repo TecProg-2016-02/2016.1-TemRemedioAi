@@ -24,21 +24,17 @@ public class SignUpActivity extends AppCompatActivity {
 
     ParseUser user = new ParseUser();
 
-    private EditText editTextEmail;
-    private EditText editTextPassword;
-    private EditText editTextPasswordConfirmation;
-    private EditText editTextAge;
-    private EditText editTextName;
-    private EditText editTextUsername;
-
-    private RadioButton radioButtonGenderMale;
-    private RadioButton radioButtonGenderFem;
-
-    private TextView textViewGender;
-
-    private Button buttonRegister;
-    private Button buttonCancel;
-
+    private EditText editTextEmail = (EditText) findViewById(R.id.email);
+    private EditText editTextPassword = (EditText) findViewById(R.id.password);
+    private EditText editTextPasswordConfirmation = (EditText) findViewById(R.id.password2);
+    private EditText editTextAge = (EditText) findViewById(R.id.ageText);
+    private EditText editTextName = (EditText) findViewById(R.id.name);
+    private EditText editTextUsername = (EditText) findViewById(R.id.username);
+    private RadioButton radioButtonGenderMale = (RadioButton) findViewById(R.id.mascButton);
+    private RadioButton radioButtonGenderFem = (RadioButton) findViewById(R.id.femButton);
+    private TextView textViewGender = (TextView) findViewById(R.id.textViewGender);
+    private Button buttonRegister = (Button) findViewById(R.id.register_button);
+    private Button buttonCancel = (Button) findViewById(R.id.register_cancel);
     private View focusView = null;
 
     private boolean getSpecialCharacter(String word) {
@@ -61,30 +57,8 @@ public class SignUpActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
 
-        // Sets the inputs values
-        setValues();
-
         // Sets the actions of buttons
         setListener();
-    }
-
-    private void setValues() {
-
-        // find all editTexts by id and set the return in variables
-        editTextName = (EditText) findViewById(R.id.name);
-        editTextEmail = (EditText) findViewById(R.id.email);
-        editTextAge = (EditText) findViewById(R.id.ageText);
-        editTextPassword = (EditText) findViewById(R.id.password);
-        editTextUsername = (EditText) findViewById(R.id.username);
-        editTextPasswordConfirmation = (EditText) findViewById(R.id.password2);
-
-        textViewGender = (TextView) findViewById(R.id.textViewGender);
-
-        radioButtonGenderFem = (RadioButton) findViewById(R.id.femButton);
-        radioButtonGenderMale = (RadioButton) findViewById(R.id.mascButton);
-
-        buttonRegister = (Button) findViewById(R.id.register_button);
-        buttonCancel = (Button) findViewById(R.id.register_cancel);
     }
 
     private void setListener() {
