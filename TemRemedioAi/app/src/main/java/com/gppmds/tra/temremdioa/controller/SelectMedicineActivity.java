@@ -93,6 +93,10 @@ public class SelectMedicineActivity extends AppCompatActivity {
     private void setTextViewSelectedUBS(String ubsSelected) throws Exception {
         TextView textViewSelectedUBS = (TextView) findViewById(R.id.textViewSelectedUBS);
         if (textViewSelectedUBS != null) {
+
+            Log.i("SelectMedicineActivity -> setTextViewSelectedUBS",
+              "UbsSelected = " + ubsSelected);
+
             textViewSelectedUBS.setText(ubsSelected);
         } else {
             throw new Exception("Fail to found textViewSelectedUBS");
@@ -128,10 +132,18 @@ public class SelectMedicineActivity extends AppCompatActivity {
     }
 
     private void setUbsName(String ubsName) {
+
+        Log.i("SelectMedicineActivity -> setUbsName",
+              "UbsName = " + ubsName);
+
         this.ubsName = ubsName;
     }
 
     private void setUbsAttentionLevel(String ubsAttentionLevel) {
+
+        Log.i("SelectMedicineActivity -> setUbsAttentionLevel",
+              "UbsAttentionLevel = " + ubsAttentionLevel);
+
         this.ubsAttentionLevel = ubsAttentionLevel;
     }
 

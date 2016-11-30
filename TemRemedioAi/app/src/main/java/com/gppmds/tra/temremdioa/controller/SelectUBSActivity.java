@@ -136,14 +136,26 @@ public class SelectUBSActivity extends AppCompatActivity {
     }
 
     public void setMedicineName(String medicineName) {
+
+        Log.i("SelectUBSActivity -> setMedicineName",
+              "MedicineName = " + medicineName);
+
         this.medicineName = medicineName;
     }
 
     public void setMedicineDosage(String medicineDosage) {
+
+        Log.i("SelectUBSActivity -> setMedicineDosage",
+              "MedicineDosage = " + medicineDosage);
+
         this.medicineDosage = medicineDosage;
     }
 
     public void setMedicineAttentionLevel(String medicineAttentionLevel) {
+ 
+        Log.i("SelectUBSActivity -> setMedicineAttentionLevel",
+              "MedicineAttentionLevel = " + medicineAttentionLevel);
+
         this.medicineAttentionLevel = medicineAttentionLevel;
     }
 
