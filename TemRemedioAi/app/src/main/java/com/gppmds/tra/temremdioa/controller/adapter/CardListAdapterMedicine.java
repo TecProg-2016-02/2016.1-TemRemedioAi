@@ -14,6 +14,8 @@ import android.view.ViewGroup;
 import android.widget.Filterable;
 import android.widget.RelativeLayout;
 
+import static junit.framework.Assert.*;
+
 import com.gppmds.tra.temremdioa.controller.adapter.holder.ViewHolderMedicine;
 import com.gppmds.tra.temremdioa.model.Medicine;
 import com.tra.gppmds.temremdioa.R;
@@ -50,6 +52,7 @@ public class CardListAdapterMedicine extends RecyclerView.Adapter<ViewHolderMedi
 
     public void setShowButtonUBSs(Boolean showButtonUBSs) {
 
+        assertFalse(showButtonUBSs == null);
         this.showButtonUBSs = showButtonUBSs;
 
     }
@@ -57,12 +60,15 @@ public class CardListAdapterMedicine extends RecyclerView.Adapter<ViewHolderMedi
 
     public void setShowButtonInform(Boolean showButtonInform) {
 
+        assertFalse(showButtonInform == null);
         this.showButtonInform = showButtonInform;
 
     }
 
     public void setUbsName(String ubsName) {
 
+        assertEquals("", ubsName);
+        assert ubsName != null;
         this.ubsName = ubsName;
 
     }
