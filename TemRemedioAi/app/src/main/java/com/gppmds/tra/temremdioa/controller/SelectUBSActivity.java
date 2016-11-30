@@ -25,6 +25,7 @@ public class SelectUBSActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_ubs);
 
@@ -37,7 +38,6 @@ public class SelectUBSActivity extends AppCompatActivity {
         } catch (Exception e) {
 
         }
-
 
         CardListAdapterUBS claUbs = new CardListAdapterUBS(SelectUBSActivity.this, getListOfUbs(getFilterAttentionLevel()));
         claUbs.setShowButtonMedicines(false);
@@ -59,11 +59,13 @@ public class SelectUBSActivity extends AppCompatActivity {
     }
 
     public LinearLayoutManager createLinearLayoutManager() {
+        
         LinearLayoutManager llm = new LinearLayoutManager(getApplicationContext());
         return llm;
     }
 
     public void createRecyclerView(CardListAdapterUBS cardListAdapterUBS) throws Exception {
+        
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.ubs_recycler_view);
         if (recyclerView != null) {
             recyclerView.setLayoutManager(createLinearLayoutManager());
@@ -80,8 +82,8 @@ public class SelectUBSActivity extends AppCompatActivity {
         queryUBS.whereContainedIn(UBS.getUbsAttentionLevelTitle(), filterAttentionLevel);
         queryUBS.orderByAscending(UBS.getUbsNameTitle());
         queryUBS.fromLocalDatastore();
-        List<UBS> ubsList = null;
 
+        List<UBS> ubsList = null;
         try {
             ubsList = queryUBS.find();
         } catch (ParseException e) {
@@ -92,6 +94,7 @@ public class SelectUBSActivity extends AppCompatActivity {
     }
 
     private void setTextViewSelectedMedicine(String medicineSelected) throws Exception {
+        
         TextView textViewMedicineSelected = (TextView) findViewById(R.id.textViewMedicineSelected);
         if (textViewMedicineSelected != null) {
             textViewMedicineSelected.setText(medicineSelected);
@@ -101,6 +104,7 @@ public class SelectUBSActivity extends AppCompatActivity {
     }
 
     private void setTextViewUbsQuantityFound(int quantityFound) throws Exception {
+        
         TextView textViewUbsQuantity = (TextView) findViewById(R.id.textViewUbsQuantity);
         if (textViewUbsQuantity != null) {
             textViewUbsQuantity.setText("Encontrada(s): " + quantityFound);
@@ -110,28 +114,33 @@ public class SelectUBSActivity extends AppCompatActivity {
     }
 
     public void setMedicineInfo() {
+
         setMedicineName(getIntent().getStringExtra("nomeRemedio"));
         setMedicineDosage(getIntent().getStringExtra("medicineDos"));
         setMedicineAttentionLevel(getIntent().getStringExtra("nivelAtencao"));
+
         setFilterAttentionLevel(getMedicineAttentionLevel());
     }
 
-    public void setFilterAttentionLevel(String medicineAttentionLevel) {
-        String[] attentionLevelFilters = medicineAttentionLevel.split(",");
-
+    public void setFilterAttentionLevel(String medicineAttentionLevel) {        
         /* Getting attention level count */
         filterAttentionLevel = new ArrayList<String>();
+
+        String[] attentionLevelFilters = medicineAttentionLevel.split(",");
         for(int i = 0; i < attentionLevelFilters.length; i++) {
             if ("HO".equalsIgnoreCase(attentionLevelFilters[i])) {
                 attentionLevelFilters[i] = "HO,AB";
             }
+
             Log.i("CLAUS WHERE", "Nível de atenção do Remédio " + i + ": "
                     + attentionLevelFilters[i]);
+
             filterAttentionLevel.add(attentionLevelFilters[i]);
         }
     }
 
     public ArrayList<String> getFilterAttentionLevel() {
+        
         return filterAttentionLevel;
     }
 
@@ -160,13 +169,16 @@ public class SelectUBSActivity extends AppCompatActivity {
     }
 
     public String getMedicineAttentionLevel() {
+        
         return this.medicineAttentionLevel;
     }
 
     public String getMedicineName() {
+        
         return this.medicineName;
     }
     public String getMedicineDosage() {
+        
         return this.medicineDosage;
     }
 }
