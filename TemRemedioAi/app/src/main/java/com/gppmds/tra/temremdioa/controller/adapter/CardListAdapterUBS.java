@@ -42,10 +42,14 @@ public class CardListAdapterUBS extends RecyclerView.Adapter<ViewHolderUBS> impl
             this.dataUBS = dataUBS;
             this.filterDataUBS = dataUBS;
         } else {
-
-            Log.e("FilterSearchUBS -> filterResults",
+            Exception eventException = new Exception("Invalid numbers to size.");
+            try {
+                throw eventException;
+            } catch (Exception exception) {
+                exception.notify();
+                Log.e("CardListAdapterUBS -> constructor",
                       "invalid size");
-
+            }
         }
 
         setShowButtonMedicines(true);
