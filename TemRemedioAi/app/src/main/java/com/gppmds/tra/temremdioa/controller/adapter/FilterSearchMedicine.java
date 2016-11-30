@@ -25,8 +25,8 @@ public class FilterSearchMedicine extends Filter{
                   "FilterList["+ i +"] = " + filterList[i]);
         }
 
-        this.adapter = adapter;
-        this.filterList = filterList;
+        this.adapter = (CardListAdapterMedicine) adapter;
+        this.filterList = (List<Medicine>) filterList;
     }
 
     @Override
@@ -46,8 +46,8 @@ public class FilterSearchMedicine extends Filter{
                         /* Nothing to do */
                     }
                 }
-                results.count = filteredMedicines.size();
-                results.values = filteredMedicines;
+                results.count = (int) filteredMedicines.size();
+                results.values = (List<Medicine>) filteredMedicines;
             } else {
                 Exception eventException = new Exception("Invalid numbers to size.");
                 try {
