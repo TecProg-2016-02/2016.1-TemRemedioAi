@@ -21,6 +21,8 @@ import com.parse.SignUpCallback;
 import com.tra.gppmds.temremdioa.R;
 import android.util.Log;
 
+import static junit.framework.Assert.*;
+
 public class SignUpActivity extends AppCompatActivity {
 
     ParseUser user = new ParseUser();
@@ -248,18 +250,21 @@ public class SignUpActivity extends AppCompatActivity {
         EditText editTextEmail = (EditText) findViewById(R.id.email);
         editTextEmail.setError(null);
         String email = editTextEmail.getText().toString();
+        assertTrue(validateEmail(email, editTextEmail) != null);
         boolean validEmail = validateEmail(email, editTextEmail);
 
         // Checks inputs name
         EditText editTextName = (EditText) findViewById(R.id.name);
         editTextName.setError(null);
         String name = editTextName.getText().toString();
+        assertTrue(validateName(name, editTextName) != null);
         boolean validName = validateName(name, editTextName);
 
         // Checks inputs age
         int age = 0;
         EditText editTextAge = (EditText) findViewById(R.id.ageText);
         editTextAge.setError(null);
+        assertTrue(validateAge(age, editTextAge) != null);
         boolean validAge = validateAge(age, editTextAge);
 
         // Check inputs gender
@@ -269,6 +274,8 @@ public class SignUpActivity extends AppCompatActivity {
         radioButtonGenderMale.setError(null);
         radioButtonGenderFem.setError(null);
         textViewGender.setError(null);
+        assertTrue(validateGender(textViewGender, radioButtonGenderMale, 
+                                  radioButtonGenderFem) != null);
         boolean validGender = validateGender(textViewGender, radioButtonGenderMale, 
                                                              radioButtonGenderFem);
         String gender = validateChoiceGender(radioButtonGenderMale, radioButtonGenderFem);
@@ -277,6 +284,7 @@ public class SignUpActivity extends AppCompatActivity {
         EditText editTextUsername = (EditText) findViewById(R.id.username);
         editTextUsername.setError(null);
         String username = editTextUsername.getText().toString();
+        assertTrue(validateUsername(username, editTextUsername) != null);
         boolean validUsername = validateUsername(username, editTextUsername);
 
         if (!validPassoword || !validEmail || !validName || !validAge || !validGender || validUsername) {
