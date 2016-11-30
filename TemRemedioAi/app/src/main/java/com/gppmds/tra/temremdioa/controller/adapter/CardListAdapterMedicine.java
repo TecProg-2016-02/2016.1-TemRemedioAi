@@ -25,8 +25,8 @@ import java.util.List;
 
 public class CardListAdapterMedicine extends RecyclerView.Adapter<ViewHolderMedicine> implements Filterable {
 
-    public static List<Medicine> dataMedicine;
-    List<Medicine> filterDataMedicine;
+    public static List<Medicine> dataMedicine  = new ArrayList<Medicine>();
+    List<Medicine> filterDataMedicine  = new ArrayList<Medicine>();
     Context contextOpen;
     FilterSearchMedicine filterForMedicine;
     private Boolean showButtonUBSs;
