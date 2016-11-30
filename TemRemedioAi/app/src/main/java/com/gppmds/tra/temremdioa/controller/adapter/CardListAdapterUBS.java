@@ -38,9 +38,9 @@ public class CardListAdapterUBS extends RecyclerView.Adapter<ViewHolderUBS> impl
                 Log.d("CardListAdapterUBS -> constructor",
                       "DataUBS["+ i +"] = " + dataUBS[i]);
             }
-            this.contextOpen = context;
-            this.dataUBS = dataUBS;
-            this.filterDataUBS = dataUBS;
+            this.contextOpen = (Context) context;
+            this.dataUBS = (List<UBS>) dataUBS;
+            this.filterDataUBS = (List<UBS>) dataUBS;
         } else {
             Exception eventException = new Exception("Invalid numbers to size.");
             try {
@@ -122,7 +122,7 @@ public class CardListAdapterUBS extends RecyclerView.Adapter<ViewHolderUBS> impl
     private void setShowButtonMedicines(Boolean showButtonMedicines) {
 
         assertTrue(showButtonMedicines != null);
-        this.showButtonMedicines = showButtonMedicines;
+        this.showButtonMedicines = (Boolean) showButtonMedicines;
     }
 
     public void createFilter() {
@@ -134,7 +134,7 @@ public class CardListAdapterUBS extends RecyclerView.Adapter<ViewHolderUBS> impl
     private void setShowButtonInform(boolean showButtonInform) {
 
         assertTrue(showButtonInform != null);
-        this.showButtonInform = showButtonInform;
+        this.showButtonInform = (Boolean) showButtonInform;
     }
 
     public boolean getShowButtonInform(){
@@ -145,7 +145,7 @@ public class CardListAdapterUBS extends RecyclerView.Adapter<ViewHolderUBS> impl
 
         assertEquals("", medicineName);
         assert medicineName != null;
-        this.medicineName = medicineName;
+        this.medicineName = (String) medicineName;
     }
 
     public String getMedicineName() {
@@ -157,7 +157,7 @@ public class CardListAdapterUBS extends RecyclerView.Adapter<ViewHolderUBS> impl
 
         assertEquals("", medicineDos);
         assert medicineDos != null;
-        this.medicineDos= medicineDos;
+        this.medicineDos = (String) medicineDos;
     }
 
     public String getMedicineDos(){
