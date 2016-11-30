@@ -24,9 +24,9 @@ import java.util.List;
 
 public class CardListAdapterUBS extends RecyclerView.Adapter<ViewHolderUBS> implements Filterable{
 
-    public static List<UBS> dataUBS;
+    public static List<UBS> dataUBS = new ArrayList<UBS>();
 
-    List<UBS> filterDataUBS;
+    List<UBS> filterDataUBS = new ArrayList<UBS>();
 
 
     FilterSearchUBS filter;
