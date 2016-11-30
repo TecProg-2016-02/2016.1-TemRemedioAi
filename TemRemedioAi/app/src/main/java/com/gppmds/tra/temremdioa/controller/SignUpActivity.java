@@ -24,12 +24,7 @@ public class SignUpActivity extends AppCompatActivity {
 
     ParseUser user = new ParseUser();
 
-    private EditText editTextEmail = (EditText) findViewById(R.id.email);
-    private EditText editTextPassword = (EditText) findViewById(R.id.password);
-    private EditText editTextPasswordConfirmation = (EditText) findViewById(R.id.password2);
-    private EditText editTextAge = (EditText) findViewById(R.id.ageText);
-    private EditText editTextName = (EditText) findViewById(R.id.name);
-    private EditText editTextUsername = (EditText) findViewById(R.id.username);
+   
     private RadioButton radioButtonGenderMale = (RadioButton) findViewById(R.id.mascButton);
     private RadioButton radioButtonGenderFem = (RadioButton) findViewById(R.id.femButton);
     private TextView textViewGender = (TextView) findViewById(R.id.textViewGender);
@@ -78,7 +73,9 @@ public class SignUpActivity extends AppCompatActivity {
 
     }
 
-    private boolean validatePassoword(String password, String passwordConfirmation) {
+    private boolean validatePassoword(String password, String passwordConfirmation,
+                                      EditText editTextPassword, EditText editTextPasswordConfirmation) {
+
         boolean passwordValid = true;
         int minimumSize = 6;
 
@@ -108,7 +105,7 @@ public class SignUpActivity extends AppCompatActivity {
         return passwordValid;
     }
 
-    private boolean validateEmail(String email) {
+    private boolean validateEmail(String email, EditText editTextEmail) {
         boolean emailValid = true;
 
         // if = true, set error message and return to focusView in all cases
@@ -130,7 +127,7 @@ public class SignUpActivity extends AppCompatActivity {
         return emailValid;
     }
 
-    private boolean validateName(String name) {
+    private boolean validateName(String name, EditText editTextName) {
         boolean nameValid = true;
 
         // if = true, set error message and return to focusView in all cases
@@ -189,7 +186,7 @@ public class SignUpActivity extends AppCompatActivity {
         return genderValid;
     }
 
-    private boolean validateUsername(String username) {
+    private boolean validateUsername(String username, EditText editTextUsername) {
         boolean usernameValid = true;
 
         // verified if variablea username is empty
@@ -235,31 +232,39 @@ public class SignUpActivity extends AppCompatActivity {
 
         resetErrors();
 
+
         // Store values at the time of the login attempt.
         // Checks inputs password
+        EditText editTextPassword = (EditText) findViewById(R.id.password);
+        EditText editTextPasswordConfirmation = (EditText) findViewById(R.id.password2);
         String password = editTextPassword.getText().toString();
         String passwordConfirmation = editTextPasswordConfirmation.getText().toString();
-        boolean validPassoword = validatePassoword(password, passwordConfirmation);
+        boolean validPassoword = validatePassoword(password, passwordConfirmation, 
+                                                   editTextPassword, editTextPasswordConfirmation);
 
         // Checks inputs email
+        EditText editTextEmail = (EditText) findViewById(R.id.email);
         String email = editTextEmail.getText().toString();
-        boolean validEmail = validateEmail(email);
+        boolean validEmail = validateEmail(email, editTextEmail);
 
         // Checks inputs name
+        EditText editTextName = (EditText) findViewById(R.id.name);
         String name = editTextName.getText().toString();
-        boolean validName = validateName(name);
+        boolean validName = validateName(name, editTextName);
 
         // Checks inputs age
         int age = 0;
-        boolean validAge = validateAge(age);
+        EditText editTextAge = (EditText) findViewById(R.id.ageText);
+        boolean validAge = validateAge(age, editTextAge);
 
         // Check inputs gender
         boolean validGender = validateGender();
         String gender = validateChoiceGender();
 
         // Checks inputs username
+        EditText editTextUsername = (EditText) findViewById(R.id.username);
         String username = editTextUsername.getText().toString();
-        boolean validUsername = validateUsername(username);
+        boolean validUsername = validateUsername(username, editTextUsername);
 
         if (!validPassoword || !validEmail || !validName || !validAge || !validGender || validUsername) {
             // Show errors for user
