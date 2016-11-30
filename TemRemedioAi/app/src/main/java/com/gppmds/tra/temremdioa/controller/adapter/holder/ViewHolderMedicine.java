@@ -224,10 +224,6 @@ public class ViewHolderMedicine extends RecyclerView.ViewHolder {
     }
 
     public PieData getDataPie(Medicine medicine) {
-        PieData pieData = null;
-
-        Integer countNotificationAvailable = 0;
-        Integer countNotificationNotAvailable = 0;
 
         ParseQuery<Notification> queryNotificationAvailable = Notification.getQuery();
         queryNotificationAvailable.fromLocalDatastore();
@@ -237,6 +233,7 @@ public class ViewHolderMedicine extends RecyclerView.ViewHolder {
                 .getTitleMedicineDosage(), medicine.getMedicineDosage());
         queryNotificationAvailable.whereEqualTo(Notification
                 .getTitleAvailable(), true);
+        
         if (ubsSelectedName != "") {
             queryNotificationAvailable.whereEqualTo(Notification
                     .getTitleUBSName(), ubsSelectedName);
@@ -244,6 +241,7 @@ public class ViewHolderMedicine extends RecyclerView.ViewHolder {
             // Nothing to do
         }
 
+        Integer countNotificationAvailable = 0;
         try {
             countNotificationAvailable = queryNotificationAvailable.count();
         } catch (ParseException e) {
@@ -253,11 +251,12 @@ public class ViewHolderMedicine extends RecyclerView.ViewHolder {
         ParseQuery<Notification> queryNotificationNotAvailable = Notification.getQuery();
         queryNotificationNotAvailable.fromLocalDatastore();
         queryNotificationNotAvailable.whereEqualTo(Notification
-                .getTitleMedicineName(), medicine.getMedicineDescription());
+                .getTitleMedicineName(), medicine.getMedicineDescription());      
         queryNotificationNotAvailable.whereEqualTo(Notification
                 .getTitleMedicineDosage(), medicine.getMedicineDosage());
         queryNotificationNotAvailable.whereEqualTo(Notification
                 .getTitleAvailable(), false);
+        
         if (ubsSelectedName != "") {
             queryNotificationNotAvailable.whereEqualTo(Notification
                     .getTitleUBSName(), ubsSelectedName);
@@ -265,18 +264,18 @@ public class ViewHolderMedicine extends RecyclerView.ViewHolder {
             // Nothing to do
         }
 
+        Integer countNotificationNotAvailable = 0;
         try {
             countNotificationNotAvailable = queryNotificationNotAvailable.count();
         } catch (ParseException e) {
             e.printStackTrace();
         }
 
-        ArrayList<Entry> valuesAvailable = new ArrayList<Entry>();
         ArrayList<String> valuesLegend = new ArrayList<String>();
-
         valuesLegend.add("Sim");
         valuesLegend.add("Não");
 
+        ArrayList<Entry> valuesAvailable = new ArrayList<Entry>();
         valuesAvailable.add(new Entry((float) countNotificationAvailable, sequence.ZERO.ordinal()));
         valuesAvailable.add(new Entry((float) countNotificationNotAvailable, sequence.ONE.ordinal()));
 
@@ -286,23 +285,25 @@ public class ViewHolderMedicine extends RecyclerView.ViewHolder {
         pieDataSet.setSliceSpace(5);
         pieDataSet.setValueTextSize(10);
 
-
+        PieData pieData = null;
         pieData = new PieData(valuesLegend, pieDataSet);
 
         return pieData;
     }
 
     private String generateTextNotification(Notification notification) {
+
         String textOfNotification = "";
         if (notification.getAvailable()) {
             textOfNotification = "Disponível em ";
         } else {
             textOfNotification = "Indisponível em ";
         }
-        Calendar dayCalendar = Calendar.getInstance(new Locale("pt", "BR"));
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd MMM yyyy");
 
+        Calendar dayCalendar = Calendar.getInstance(new Locale("pt", "BR"));
         dayCalendar.setTime(notification.getDateInform());
+
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd MMM yyyy");
         textOfNotification = textOfNotification + simpleDateFormat
                 .format(dayCalendar.getTime());
 
@@ -310,20 +311,22 @@ public class ViewHolderMedicine extends RecyclerView.ViewHolder {
     }
 
     private List<Notification> getNotifications(Medicine medicine) {
-        List<Notification> listNotification = null;
 
         ParseQuery<Notification> queryNotification = Notification.getQuery();
         queryNotification.whereEqualTo(Notification.getTitleMedicineName(),
                 medicine.getMedicineDescription());
         queryNotification.whereEqualTo(Notification.getTitleMedicineDosage(),
                 medicine.getMedicineDosage());
+        
         if (!ubsSelectedName.isEmpty()) {
             queryNotification.whereEqualTo(Notification.getTitleUBSName(),
                     ubsSelectedName);
         }
+        
         queryNotification.orderByDescending(Notification.getTitleDateInform());
         queryNotification.setLimit(sequence.THREE.ordinal());
 
+        List<Notification> listNotification = null;
         try {
             listNotification = queryNotification.find();
         } catch (ParseException e) {
@@ -334,6 +337,7 @@ public class ViewHolderMedicine extends RecyclerView.ViewHolder {
     }
 
     private void setInformationOfChartWithoutNotification() {
+        
         pieChart.setDescription("");
         pieChart.setDrawHoleEnabled(true);
         pieChart.setHoleRadius(sequence.ZERO.ordinal());
@@ -341,6 +345,7 @@ public class ViewHolderMedicine extends RecyclerView.ViewHolder {
         pieChart.setDrawSliceText(false);
         pieChart.setRotationAngle(sequence.ZERO.ordinal());
         pieChart.setRotationEnabled(true);
+        
         pieChart.animateY(ran.getNum().ONE_HUNDRED);
 
         pieChart.getLegend().setEnabled(true);
@@ -349,11 +354,10 @@ public class ViewHolderMedicine extends RecyclerView.ViewHolder {
 
         pieChart.setNoDataTextDescription("Sem notificações encontradas.");
 
-        ArrayList<Entry> valuesAvailable = new ArrayList<Entry>();
         ArrayList<String> valuesLegend = new ArrayList<String>();
-
         valuesLegend.add("Sem Notificação");
 
+        ArrayList<Entry> valuesAvailable = new ArrayList<Entry>();
         valuesAvailable.add(new Entry((float) sequence.ONE.ordinal(), sequence.ZERO.ordinal()));
 
         PieDataSet pieDataSet = new PieDataSet(valuesAvailable, "");
@@ -369,6 +373,7 @@ public class ViewHolderMedicine extends RecyclerView.ViewHolder {
     }
 
     private void setInformationOfChart(Medicine medicine) {
+
         pieChart.setDescription("");
         pieChart.setDrawHoleEnabled(true);
         pieChart.setHoleRadius(sequence.ZERO.ordinal());
@@ -376,6 +381,7 @@ public class ViewHolderMedicine extends RecyclerView.ViewHolder {
         pieChart.setDrawSliceText(false);
         pieChart.setRotationAngle(sequence.ZERO.ordinal());
         pieChart.setRotationEnabled(true);
+
         pieChart.animateY(ran.getNum().ONE_HUNDRED);
 
         pieChart.getLegend().setEnabled(true);
@@ -389,16 +395,20 @@ public class ViewHolderMedicine extends RecyclerView.ViewHolder {
     private void expand() {
         /* set Visible */
         Log.i("LOG", "Expand enter, View.VISIBLE");
+
         expandLayout.setVisibility(View.VISIBLE);
+        
         mAnimator.start();
+        
         imageViewArrow.setBackgroundResource(R.drawable.ic_keyboard_arrow_up);
     }
 
     private void collapse() {
-        int finalHeight = expandLayout.getHeight();
 
+        int finalHeight = expandLayout.getHeight();
         ValueAnimator mAnimator2 = slideAnimator(finalHeight, sequence.ONE.ordinal());
         mAnimator2.addListener(new Animator.AnimatorListener(){
+            
             @Override
             public void onAnimationEnd(Animator animator) {
                 Log.i("LOG", "collapse onAnimationEnd enter, View.GONE");
@@ -420,24 +430,28 @@ public class ViewHolderMedicine extends RecyclerView.ViewHolder {
                 /* Method declared empty because the override is mandatory */
             }
         });
+
         mAnimator2.start();
+        
         imageViewArrow.setBackgroundResource(R.drawable.ic_keyboard_arrow_down);
     }
 
     private ValueAnimator slideAnimator(int start, int end) {
-        ValueAnimator animator = ValueAnimator.ofInt(start, end);
+        
 
+        ValueAnimator animator = ValueAnimator.ofInt(start, end);
         animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+        
             @Override
             public void onAnimationUpdate(ValueAnimator valueAnimator) {
                 /* Update Height */
-                int value = (Integer) valueAnimator.getAnimatedValue();
-
                 ViewGroup.LayoutParams layoutParams = expandLayout.getLayoutParams();
+                int value = (Integer) valueAnimator.getAnimatedValue();
                 layoutParams.height = value;
                 expandLayout.setLayoutParams(layoutParams);
             }
         });
+        
         return animator;
     }
 
